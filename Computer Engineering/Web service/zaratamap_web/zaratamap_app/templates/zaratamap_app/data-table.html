@@ -1,0 +1,804 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block vueImport %}
+    <script type="text/javascript" src="{% static 'js/vue.js' %}"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <style>.map{width:100%;height:400px} .mapLines{width:100%;height:400px} .mapIcons{width:100%;height:400px}
+    .tooltip, .tooltipLines, .tooltipIcons {
+        position: relative;
+        padding: 3px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        opacity: 0.7;
+        white-space: nowrap;
+        font: 10pt sans-serif;
+    }</style>
+    <link rel="stylesheet" href="{% static 'vendor/zaratamapcss/map.1f948dd0.css' %}">
+    {#    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>#}
+    {#    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>#}
+{% endblock %}
+
+{% block contenido %}
+    <div id="vueapp">
+        <div class="container-fluid  dashboard-content">
+            <!-- ============================================================== -->
+            <!-- pagehader  -->
+            <!-- ============================================================== -->
+
+            <!-- ============================================================== -->
+            <!-- pagehader  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- basic tabs  -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
+                <div class="section-block">
+                    <h4 class="text-center">{% blocktrans %}Zaratamap GIS features: Custom noise map{% endblocktrans %}</h4>
+                    <p class="text-center">{% blocktrans %}Please, introduce your filter parameters in the related fields{% endblocktrans %}:</p>
+                </div>
+                <form v-on:submit.prevent="onSubmit" v-on:click="getButton($event)" method="post" id="filterForm">
+                    {% csrf_token %}
+                    <div class="tab-outline">
+                        <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="tab-outline-one" data-toggle="tab" href="#outline-one" role="tab" aria-controls="home" aria-selected="true">{% trans 'Table' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Timeframe' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-outline-three" data-toggle="tab" href="#outline-three" role="tab" aria-controls="contact" aria-selected="false">{% trans 'Noise levels' %}</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="tab-outline-four" data-toggle="tab" href="#outline-four" role="tab" aria-controls="contact" aria-selected="false">{% trans 'Geo-position' %}</a>
+                            </li>
+                            {% if perms.zaratamap_app.can_view %}
+                                <li class="nav-item">
+                                    <a class="nav-link" id="tab-outline-five" data-toggle="tab" href="#outline-five" role="tab" aria-controls="contact" aria-selected="false">{% trans 'Vehicle' %}</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                        <div class="tab-content" id="myTabContent2">
+                            <div class="tab-pane fade show active" id="outline-one" role="tabpanel" aria-labelledby="tab-outline-one">
+                                <p class="lead"> {% trans 'Table configuration' %} </p>
+                                <p style="margin: 0">{% trans 'Font size' %}:&emsp;<input v-model="fontSize" type="range" min="10" max="200" step = "10" value="100" class="slider" id="myRange2" style="vertical-align: middle"></p>
+                                <br>
+                                <div>
+                                    {% for k in column_names %}
+                                        {% ifequal k "date" %}
+                                            <p class="custom-control-inline">{% trans "Displayed date and time" %}:</p>
+                                        {% else %}
+                                            {%ifequal k "lat" %}
+                                                <br><p class="custom-control-inline">{% trans "Displayed coordinates" %}: </p>
+                                            {% else %}
+                                                {%ifequal k "Laeq" %}
+                                                    <br><p class="custom-control-inline">{% trans "Displayed overall noise levels" %}: </p>
+                                                {% else %}
+                                                    {%ifequal k "o63" %}
+                                                        <br><p class="custom-control-inline">{% trans "Displayed octaves" %}: </p><br>
+                                                    {% else %}
+                                                        {%ifequal k "class" %}
+                                                            <br><p class="custom-control-inline">{% trans "Displayed noise origin" %}: </p>
+                                                        {% endifequal %}
+                                                    {% endifequal %}
+                                                {% endifequal %}
+                                            {% endifequal %}
+                                        {% endifequal %}
+                                        <label class="custom-control custom-checkbox custom-control-inline">
+                                            <input type="checkbox" checked="" class="custom-control-input" name={{ k }} @click="checkForBarChanges"><span class="custom-control-label">
+                                        {% if 'o' in k and k != 'lon' %}
+                                            {% trans k|slice:"7:" %}
+                                        {% else %}
+                                            {% trans k %}
+                                        {% endif %}
+                                    </span>
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="outline-two" role="tabpanel" aria-labelledby="tab-outline-two">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <p class="lead">{% trans "Pick date" %}:</p>
+                                        <div style="float:left;">
+                                            <label for="date_from" style="position:relative; top:5px;">{% trans "From" %}...&emsp;</label>
+                                            <br><br>
+                                            <label for="date_to" style="position:relative; top:5px;">{% trans "To" %}...&emsp;</label>
+                                        </div>
+                                        <div>
+                                            <input type="date" class="datepicker" id="date_from" name="date_from">
+                                            <br><br>
+                                            <input type="date" class="datepicker" id="date_to" name="date_to">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <p class="lead">{% trans "Pick time" %}:</p>
+                                        <div style="float:left;">
+                                            <label for="time_from" style="position:relative; top:5px;">{% trans "From" %}...&emsp;</label>
+                                            <br><br>
+                                            <label for="time_to" style="position:relative; top:5px;">{% trans "To" %}...&emsp;</label>
+                                        </div>
+                                        <div>
+                                            <input type="time" class="datepicker" id="time_from" name="time_from" step=1>
+                                            <br><br>
+                                            <input type="time" class="datepicker" id="time_to" name="time_to" step=1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="outline-three" role="tabpanel" aria-labelledby="tab-outline-three">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <p class="lead">{% trans "Noise level range" %}:</p>
+                                        <div style="float:left;">
+                                            <label for="noise_from" style="position:relative; top:5px;">{% trans "From" %}...&emsp;</label>
+                                            <br><br>
+                                            <label for="noise_to" style="position:relative; top:5px;">{% trans "To" %}...&emsp;</label>
+                                        </div>
+                                        <div>
+                                            <input type="number" class="datepicker" id="noise_from" name="noise_from" step="0.01">
+                                            <br><br>
+                                            <input type="number" class="datepicker" id="noise_to" name="noise_to" step="0.01">
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <p class="lead">{% trans "Only levels above" %}:</p>
+                                        <label class="custom-control custom-checkbox" style="position:relative; left:15px;">
+                                            <input type="checkbox" class="custom-control-input" name="above_max_night"><span class="custom-control-label">{% trans "Maximum night level (50 dB)" %}</span>
+                                        </label>
+                                        <label class="custom-control custom-checkbox" style="position:relative; left:15px;top:13px;">
+                                            <input type="checkbox" class="custom-control-input" name="above_max_day"><span class="custom-control-label">{% trans "Maximum day level (55 dB)" %}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="outline-four" role="tabpanel" aria-labelledby="tab-outline-four">
+                                <p class="lead">{% trans "Search by street" %}:</p>
+                                <input class="form-control form-control-lg" type="text" name="streetName" placeholder="{% trans 'Street name' %}..." autocomplete="off">
+                                <br>
+                                <p class="lead">{% trans "Search by coordinates" %}:</p>
+                                <div class="row">
+                                    <div style="position:relative; left:25px;">
+                                        <label>{% trans "Longitude" %}:&emsp;</label>  <input type="number" class="coordinate-number" id="lon_int" name="lon_int"> <label>.</label> <input type="number" class="coordinate-number" value = "0" id="lon_dec" name="lon_dec">
+                                    </div>
+                                    <div style="position:relative; left:110px;">
+                                        <label>{% trans "Latitude" %}:&emsp;</label>  <input type="number" class="coordinate-number" id="lat_int" name="lat_int"> <label>.</label> <input type="number" class="coordinate-number" value = "0" id="lat_dec" name="lat_dec">
+                                    </div>
+                                    <div style="position:relative; left:185px;">
+                                        <label>{% trans "Surrounding km" %}:&emsp;</label>  <input type="number" class="coordinate-number" id="km_int" name="km_int"> <label>.</label> <input type="number" class="coordinate-number" value = "0" id="km_dec" name="km_dec">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="outline-five" role="tabpanel" aria-labelledby="tab-outline-five">
+                                <label class="lead" for="vehicles">{% trans "Search for vehicle" %}:</label>
+                                <div id="vehicles">
+                                </div>
+                                <br><br>
+                                <a class="btn btn-secondary" v-on:click="addVehicle('B0000')" style="color:white; position:relative; left:25px">{% trans "Add extra vehicle" %}</a>
+                                <br>
+                            </div>
+                            <br>
+                            <button class="btn btn-secondary" type="submit" id="applyButton" name="Apply">{% trans 'Apply'%}</button>
+                            {% if retrieved %}
+                                <button class="btn btn-secondary" onclick="enterFilterName()" id="storeButton" name="Store">{% trans 'Store as'%}...</button>
+                                <button type="button" class="btn btn-secondary" onclick="updateFilter()" id="updateButton" name="Store">{% trans 'Update Filter'%}</button>
+                                <button type="button" class="btn btn-secondary" onclick="removeFilter()" id="removeButton" name="Store">{% trans 'Remove Filter'%}</button>
+                            {% else %}
+                                <button class="btn btn-secondary" onclick="enterFilterName()" id="storeButton" name="Store">{% trans 'Store Filter'%}</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end basic tabs  -->
+            <!-- ============================================================== -->
+            <div style="width: 100%; text-align: center">
+                <div style="display: inline-block; margin: 0 auto;">
+                    <button class="btn btn-primary" onclick="hideTable()" id="hideTable">{% trans 'Hide table'%}</button>
+                    <br><br>
+                </div>
+            </div>
+            <div class="row" id="generalDivTable">
+                <!-- ============================================================== -->
+                <!-- data table multiselects  -->
+                <!-- ============================================================== -->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-body" id="mainTable">
+                            <div class="table-responsive_aux">
+                                <div class="aux-div" v-bind:style="getSize">
+                                </div>
+                            </div>
+                            <div class="table-responsive" ref='main'>
+                                {#                                <div id="vueapp">#}
+                                <table id="example3" class="table table-striped table-bordered" style="width:100%">
+                                    <thead>
+                                    <tr>
+                                        {% for k in column_names %}
+                                            <th class={{ k }} v-bind:style="{ fontSize: fontSize + '%' }">{% trans k %}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody id="table-data">
+                                    {#                                    {% for point in points %}#}
+                                    <tr v-for="row in rows">
+                                        {% for k in column_names %}
+                                            <td class={{ k }} v-bind:style="{ fontSize: fontSize + '%' }">[[row.{{ k }}]]</td>
+                                            {#                                            {% for key, value in point.items %}#}
+                                            {#                                                <td class={{ key }} v-bind:style="{ fontSize: fontSize + '%' }">{{ value }}</td>#}
+                                        {% endfor %}
+                                    </tr>
+                                    {#                                    {% endfor %}#}
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        {% for k in column_names %}
+                                            <th class={{ k }} v-bind:style="{ fontSize: fontSize + '%' }">{% trans k %}</th>
+                                        {% endfor %}
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        {#                        </div>#}
+
+                    </div>
+                </div>
+
+
+
+                {#    TODO: Eliminar del js en vez de hacer hidden#}
+                <div hidden id="inputForm">
+                    Latitude:
+                    <input id="latitude" type="text" value="-2.9401"/>
+                    Longitude:
+                    <input id="longitude" type="text" value="43.1706"/>
+                    <input id="btn_addmarker" type="button" value="Add Marker" />
+                </div>
+                <var id="column_names" hidden>{{ column_names }}</var>
+                <var id="lats" hidden>{{ lats }}</var>
+                <var id="lons" hidden>{{ lons }}</var>
+                <var id="zoom" hidden>{{ zoom }}</var>
+                <var id="center" hidden>{{ center }}</var>
+                <div id="tooltip" class="tooltip"></div>
+                <div id="tooltipLines" class="tooltipLines"></div>
+                <var id="geoJsonPoints" hidden>{"type": "FeatureCollection","features": []}</var>
+                <var id="points" hidden>{{ initialValues.points }}</var>
+                {#                <var id="initialValues" hidden>{{ initialValues }}</var>#}
+                {#            <var id="geoJson" hidden>{{ geoJsonStreets }}</var>#}
+                <!-- ============================================================== -->
+                <!-- end data table multiselects  -->
+                <!-- ============================================================== -->
+            </div>
+        </div>
+    </div>
+    <div style="width: 100%; text-align: center">
+        <div style="display: inline-block; margin: 0 auto;">
+            <button id="showmap" class="btn btn-primary" onclick="myFunction()" >{% trans 'Hide map' %}</button>
+            <button id="changemap1" class="btn btn-primary" onclick="pointMap()">{% trans 'Point map' %}</button>
+            <button id="changemap2" class="btn btn-primary" onclick="noiseMap()">{% trans 'Noise map' %}</button>
+            <button id="changemap3" class="btn btn-primary" onclick="noiseSourceMap()">{% trans 'Noise source map' %}</button>
+        </div>
+    </div>
+    <br>
+    <div id="mapMainDiv" style="height: 400px">
+        <div id="mapdiv" style="position:relative;z-index:5">
+            <div id="map" class="map"></div>
+        </div>
+        <div id="mapLinesdiv" style="position:relative;z-index:3;top: -400px;">
+            <div id="mapLines" class="mapLines"></div>
+        </div>
+        <div id="mapIconsdiv" style="position:relative;z-index:3;top: -800px;">
+            <div id="mapIcons" class="mapIcons"></div>
+        </div>
+    </div>
+
+    <script type="module" src="{% static 'js/filter_map.js' %}">    </script>
+    <br>
+    <div style="width: 100%; text-align: center">
+        <div style="display: inline-block; margin: 0 auto;">
+            <button class="btn btn-secondary" id="bPrintPDF" onclick="selectElementsToPrint()"><i class="fa fa-download"></i> {% trans 'Generate PDF or print' %}</button>
+        </div>
+    </div>
+    <img id="mapPointsImageImg" style="display: block; margin: 0 auto;" src="" alt="" width="900px" height="auto" hidden>
+    <img id="mapLinesImageImg" style="display: block; margin: 0 auto;" src="" alt="" width="900px" height="auto" hidden>
+    <img id="mapIconsImageImg" style="display: block; margin: 0 auto;" src="" alt="" width="900px" height="auto" hidden>
+    <form id="formDelete">
+        {% csrf_token %}
+    </form>
+
+    <div id="tooltipIcons" class="tooltipIcons"></div>
+    <var id="geoJsonIcons" hidden>{"type": "FeatureCollection","features": []}</var>
+
+    <var id="geoJson" hidden>{"type": "FeatureCollection","features": []}</var>
+    <var id="initialValues" hidden>{{ initialValues }}</var>
+    <img hidden src="{% static 'images/air_conditioner_background.png' %}" id="airConditionerImage">
+    <img hidden src="{% static 'images/car_horn_background.png' %}" id="carHornImage">
+    <img hidden src="{% static 'images/children_playing_background.png' %}" id="childrenPlayingImage">
+    <img hidden src="{% static 'images/dog_bark_background.png' %}" id="dogBarkImage">
+    <img hidden src="{% static 'images/drilling_background.png' %}" id="drillingImage" style="height: 30px;width: 30px;">
+    <img hidden src="{% static 'images/engine_idling_background.png' %}" id="engineIdlingImage">
+    <img hidden src="{% static 'images/gun_shot_background.png' %}" id="gunShotImage">
+    <img hidden src="{% static 'images/jackhammer_background.png' %}" id="jackhammerImage">
+    <img hidden src="{% static 'images/siren_background.png' %}" id="sirenImage">
+    <img hidden src="{% static 'images/street_music_background.png' %}" id="streetMusicImage">
+{% endblock %}
+
+{% block modals %}
+
+    <div id="modalWindow" class = "modalMainDiv">
+        <div id="modalDiv" class = "modalInnerDiv">
+            <p>
+                Select elements to print or put in PDF:
+                <br><br>
+                <label class="custom-control custom-checkbox" style="position:relative; left:15px;">
+                    <input type="checkbox" class="custom-control-input" id="print-table"><span class="custom-control-label">{% trans "Data table" %}</span>
+                </label>
+                <label class="custom-control custom-checkbox" style="position:relative; left:15px;">
+                    <input type="checkbox" class="custom-control-input" id="print-point-map"><span class="custom-control-label">{% trans "Point map" %}</span>
+                </label>
+                <label class="custom-control custom-checkbox" style="position:relative; left:15px;">
+                    <input type="checkbox" class="custom-control-input" id="print-line-map"><span class="custom-control-label">{% trans "Noise map" %}</span>
+                </label>
+                <label class="custom-control custom-checkbox" style="position:relative; left:15px;">
+                    <input type="checkbox" class="custom-control-input" id="print-source-map"><span class="custom-control-label">{% trans "Noise source map" %}</span>
+                </label>
+            <p id="modalError" style="color: red; display: none">Please, select at least one element to continue</p>
+            <button class="btn btn-primary btn-sm" onclick="printPDF()"> {% trans 'Generate PDF or print' %}</button>
+            <button class="btn btn-primary btn-sm" onclick="closeSelectElementsToPrint()"> {% trans 'Cancel' %}</button>
+        </div>
+    </div>
+    <div id="modalNameForFilter" class = "modalMainDiv">
+        <div id="modalNameForFilterDiv" class = "modalInnerDiv">
+            <br>
+            <p>
+                Introduce name for filter:
+                <br><br>
+                <input class="form-control form-control-lg" id="filterName" type="text" name="filterName" placeholder="{% trans 'Filter name' %}..." autocomplete="off">
+            <p id="modalNameForFilterError" style="color: red; display: none">Please, select at least one element to continue</p>
+            <button class="btn btn-primary btn-sm" onclick="storeFilter()"> {% trans 'Store' %}</button>
+            <button class="btn btn-primary btn-sm" onclick="cancelStoring()"> {% trans 'Cancel' %}</button>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        new Vue({
+            delimiters : ['[[',']]'],
+            el: '#vueapp',
+            data: {
+                fontSize: 100,
+                size: document.querySelector('#example3').clientWidth,
+                state: 'default',
+                token: '',
+                button:'',
+                rows:[]
+            },
+            watch: {
+                {#checkForBarChanges(){#}
+                {#    this.size = document.querySelector('#example3').clientWidth;#}
+                {##}
+                fontSize: {
+                    handler: function (val, old) {
+                        this.$nextTick(() => {
+                            this.size = document.querySelector('#example3').clientWidth;
+                        })
+                    },
+                    deep: true
+                },
+            },
+            methods:{
+                changeState: function(newState){
+                    this.state = newState;
+                },
+                checkForBarChanges: function(event){
+                    $("." + $(event.target).attr("name")).toggle();
+                    this.$nextTick(() => {
+                        this.size = document.querySelector('#example3').clientWidth;
+                    })
+                },
+                getButton(event){
+                    button = event.target.name;
+                },
+                onSubmit(event){
+                    const form = new FormData(document.querySelector("#filterForm"));
+                    var keysToRemove = JSON.parse(document.getElementById("column_names").innerText.replace(/'/g, "\""));
+                    for (var key in keysToRemove) form.delete(keysToRemove[key]);
+                    if (button === "Apply") {
+                        fetch("http://127.0.0.1:8000/es/table_row", {
+                            method: 'POST',
+                            body: form
+                        }).then(response => response.json())
+                            .then(data => {
+                                this.rows = data.points;
+                                document.getElementById("zoom").innerText = data.zoom;
+                                console.log(data.zoom);
+                                console.log(data.center);
+                                document.getElementById("center").innerText = JSON.stringify(data.center);
+                                document.getElementById("geoJsonPoints").innerText = data.geoJsonPointsList;
+                                var geoJsonIcons = JSON.parse(data.geoJsonPointsList)
+                                for (feature in geoJsonIcons["features"]){
+                                    if (geoJsonIcons["features"][feature]["properties"]["class"] == "undefined" || geoJsonIcons["features"][feature]["properties"]["class"] == "unpredictable"){
+                                        delete geoJsonIcons["features"][feature];
+                                    }
+                                };
+                                document.getElementById("geoJsonIcons").innerText = JSON.stringify(geoJsonIcons).replace(/null,/g, "").replace(/null/g, "").replace("},]}", "}]}");
+                                document.getElementById("geoJson").innerText = data.geoJsonStreets;
+                            });
+                        if (document.getElementById("mainTable").style.display === "none") {
+                            document.getElementById("applyButton").innerText = "Apply";
+                            document.getElementById("mainTable").style.display = "block";
+                            this.$nextTick(() => {
+                                this.size = document.querySelector('#example3').clientWidth;
+                            })
+                        }
+                        {#else if(button === "Store"){#}
+                        {#    fetch("http://127.0.0.1:8000/store_filter", {#}
+                        {#        method: 'POST',#}
+                        {#        body: form#}
+                        {#    }).then(response => console.log(response));#}
+                        {##}
+                    }
+                },
+                addVehicle(code) {
+                    var node = document.createElement('div');
+                    node.setAttribute("class", "individual-vehicle");
+                    var childToAppend = document.createElement("select");
+                    childToAppend.setAttribute("class", "dropdown-filter");
+                    childToAppend.setAttribute("name", "vehicle_type");
+                    var grandChildToAppend = document.createElement("option");
+                    grandChildToAppend.setAttribute("value", "B");
+                    grandChildToAppend.appendChild(document.createTextNode("{% trans "Bicycle" %}"));
+                    childToAppend.appendChild(grandChildToAppend);
+                    grandChildToAppend = document.createElement("option");
+                    grandChildToAppend.setAttribute("value", "A");
+                    grandChildToAppend.appendChild(document.createTextNode("{% trans "Public Bus" %}"));
+                    childToAppend.appendChild(grandChildToAppend);
+                    grandChildToAppend = document.createElement("option");
+                    grandChildToAppend.setAttribute("value", "C");
+                    grandChildToAppend.appendChild(document.createTextNode("{% trans "OTA Car" %}"));
+                    childToAppend.appendChild(grandChildToAppend);
+                    childToAppend.value = code[0];
+                    node.appendChild(childToAppend);
+                    for (i = 0; i<4; i++) {
+                        childToAppend = document.createElement("input");
+                        childToAppend.setAttribute("type", "number");
+                        childToAppend.setAttribute("max", "9");
+                        childToAppend.setAttribute("value", parseInt(code[i+1]));
+                        childToAppend.setAttribute("class", "vehicle-id-digit");
+                        childToAppend.setAttribute("name", "vehicleID" + (i+1).toString());
+                        node.appendChild(childToAppend);
+                    }
+                    childToAppend = document.createElement("a");
+                    childToAppend.setAttribute("class", "btn btn-secondary btn-xs remove-button");
+                    childToAppend.setAttribute("href", "#");
+                    childToAppend.setAttribute("onclick", "removeVehicle(this)")
+                    childToAppend.appendChild(document.createTextNode("{% trans "Remove" %}"));
+                    node.appendChild(childToAppend);
+                    document.getElementById("vehicles").appendChild(node);
+                }
+            },
+            computed: {
+                getSize() {
+                    return "width:" + this.size + "px; height:20px";
+                },
+            },
+            mounted(){
+                var jsonToConvert = (document.getElementById("initialValues").innerText.replace(/'/g, '\"'));
+                jsonToConvert = (jsonToConvert.substring(1, jsonToConvert.length-1));
+                initialData = JSON.parse(jsonToConvert);
+                if (!jQuery.isEmptyObject(initialData)) {
+                    for (key in initialData) {
+                        if (key !== "above_max_day" &&
+                            key !== "above_max_night" &&
+                            key !== "vehicles" &&
+                            key !== "points" &&
+                            key !== "geoJsonPointsList" &&
+                            key !== "geoJsonStreets") {
+                            console.log(key);
+                            (document.getElementsByName(key)[0]).value = initialData[key];
+                        }
+
+                    }
+                    ;
+                    if (initialData["above_max_day"] === "True") (document.getElementsByName("above_max_day")[0]).checked = true;
+                    if (initialData["above_max_night"] === "True") (document.getElementsByName("above_max_night")[0]).checked = true;
+                    if ((initialData["vehicles"]["vehicles"]).length) {
+                        for (vehicle in initialData["vehicles"]["vehicles"]) {
+                            this.addVehicle(initialData["vehicles"]["vehicles"][vehicle]);
+                        }
+                    }
+                    this.rows = initialData.points;
+                    {#var geoParent = document.getElementById("geoJsonPoints").parentNode;#}
+                    {#geoParent.removeChild(document.getElementById("geoJsonPoints"));#}
+                    {#var geoJsonPoints = document.createElement("var");#}
+                    {#geoJsonPoints.setAttribute("id", "geoJsonPoints");#}
+                    {#geoJsonPoints.setAttribute("style", "display:\"none\"");#}
+                    {#geoParent.appendChild(geoJsonPoints);#}
+                    document.getElementById("geoJsonPoints").innerText = initialData.geoJsonPointsList;
+                    document.getElementById("geoJsonIcons").innerText = initialData.geoJsonPointsList;
+                    document.getElementById("geoJson").innerText = initialData.geoJsonStreets;
+                    if (document.getElementById("mainTable").style.display === "none") {
+                        if (this.rows.length > 0) {
+                            document.getElementById("mainTable").style.display = "block";
+                            this.$nextTick(() => {
+                                this.size = document.querySelector('#example3').clientWidth;
+                            })
+                        } else {
+                            document.getElementById("mainTable").style.display = "none";
+                        }
+                    }
+                }else {
+                    document.getElementById("mainTable").style.display = "none";
+                }
+            }
+        });
+    </script>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mapMainDiv");
+            if (x.style.display === "none") {
+                document.getElementById("showmap").innerText = "{% trans 'Hide map' %}";
+                document.getElementById("changemap1").style.display = "inline-block";
+                document.getElementById("changemap2").style.display = "inline-block";
+                document.getElementById("changemap3").style.display = "inline-block";
+                x.style.display = "block";
+            } else {
+                document.getElementById("showmap").innerText = "{% trans 'Show map' %}";
+                document.getElementById("changemap1").style.display = "none";
+                document.getElementById("changemap2").style.display = "none";
+                document.getElementById("changemap3").style.display = "none";
+                x.style.display = "none";
+            }
+        }
+
+        function removeVehicle(elem){
+            document.getElementById('vehicles').removeChild(elem.parentNode);
+        }
+
+        function pointMap() {
+            document.getElementById("mapdiv").style.zIndex = "6";
+            document.getElementById("mapLinesdiv").style.zIndex = "3";
+            document.getElementById("mapIconsdiv").style.zIndex = "3";
+        }
+
+        function noiseMap() {
+            document.getElementById("mapdiv").style.zIndex = "3";
+            document.getElementById("mapLinesdiv").style.zIndex = "6";
+            document.getElementById("mapIconsdiv").style.zIndex = "3";
+        }
+
+        function noiseSourceMap() {
+            document.getElementById("mapdiv").style.zIndex = "3";
+            document.getElementById("mapLinesdiv").style.zIndex = "3";
+            document.getElementById("mapIconsdiv").style.zIndex = "6";
+        }
+
+        // Get the modal
+        var modal = document.getElementById('modalWindow');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                document.getElementById("modalDiv").style.height = "240px";
+                document.getElementById("modalError").style.display = "none";
+                modal.style.display = "none";
+            }else if (event.target == document.getElementById('modalNameForFilter')) {
+                document.getElementById("modalNameForFilterDiv").style.height = "200px";
+                document.getElementById("modalNameForFilterError").style.display = "none";
+                document.getElementById('modalNameForFilter').style.display = "none";
+            }
+        }
+        function selectElementsToPrint(){
+            modal.style.display = "block";
+        }
+
+        function closeSelectElementsToPrint(){
+            document.getElementById("modalDiv").style.height = "240px";
+            document.getElementById("modalError").style.display = "none";
+            modal.style.display = "none";
+        }
+
+        function printPDF() {
+            if(!document.getElementById("print-table").checked &&
+                !document.getElementById("print-point-map").checked &&
+                !document.getElementById("print-line-map").checked &&
+            !document.getElementById("print-source-map").checked){
+                document.getElementById("modalDiv").style.height = "320px";
+                document.getElementById("modalError").style.display = "block";
+            }
+            else {
+                document.getElementById("modalDiv").style.height = "280px";
+                document.getElementById("modalError").style.display = "none";
+                // CREATE A WINDOW OBJECT.
+                var win = window.open('', '', 'height=700,width=700');
+
+                win.document.write('<html><head>');
+                win.document.write('<title>' + "Zaratamap report" + '</title>');   // <title> FOR PDF HEADER.
+                win.document.write('<link rel="stylesheet" href="/static/libs/css/style.css">');
+                win.document.write('</head>');
+                win.document.write('<body>');
+
+                if (document.getElementById("print-table").checked) {
+                    console.log("here");
+                    var sTable = document.getElementById('example3').outerHTML;
+                    var index1 = sTable.indexOf("font-size:");
+                    var index2 = sTable.indexOf("%", index1);
+                    var toReplace = sTable.substring(index1, index2 + 1);
+                    win.document.write(sTable.split(toReplace).join("font-size:70%"));
+                    {#win.document.write('<img src="' + document.getElementById('mapImage').innerHTML) + '">';#}
+                    win.document.write('<br>');
+                }
+                if (document.getElementById("print-point-map").checked) {
+                    while (printMapPoints() != true) ;
+                    win.document.write(document.getElementById('mapPointsImageImg').outerHTML);
+                    document.getElementById('mapPointsImageImg').src = window.location.href;
+                    win.document.write('<br>');
+                }
+
+                if (document.getElementById("print-line-map").checked) {
+                    while (printMapLines() != true) ;
+                    win.document.write(document.getElementById('mapLinesImageImg').outerHTML);
+                    document.getElementById('mapLinesImageImg').src = window.location.href;
+                    win.document.write('<br>');
+                }
+
+                if (document.getElementById("print-source-map").checked) {
+                    while (printMapIcons() != true) ;
+                    win.document.write(document.getElementById('mapIconsImageImg').outerHTML);
+                    document.getElementById('mapIconsImageImg').src = window.location.href;
+                    win.document.write('<br>');
+                }
+
+                win.document.write('</body></html>');
+
+                win.document.close(); 	// CLOSE THE CURRENT WINDOW.
+
+                win.print();    // PRINT THE CONTENTS.
+
+                modal.style.display = "none";
+            }
+        }
+        function printMapPoints(){
+            var x = document.getElementById("mapdiv");
+            if (document.getElementById('mapPointsImageImg').src.localeCompare(window.location.href) !== 0 &&
+                document.getElementById('mapPointsImageImg').src.localeCompare("data:,") !== 0){
+                return true;
+            } else {
+                setTimeout(printMapPoints, 250);
+            }
+        }
+
+        function printMapLines(){
+            var y = document.getElementById("mapLinesdiv");
+            {#y.style.display = "block";#}
+            if (document.getElementById('mapLinesImageImg').src.localeCompare(window.location.href) !== 0 &&
+                document.getElementById('mapLinesImageImg').src.localeCompare("data:,") !== 0) {
+                return true;
+                {#win.document.write(document.getElementById('mapLinesImageImg').outerHTML);#}
+                {#document.getElementById('mapLinesImageImg').src = window.location.href;#}
+
+            } else {
+                setTimeout(printMapLines, 250);
+            }
+        }
+
+        function printMapIcons(){
+            var y = document.getElementById("mapIconsdiv");
+            {#y.style.display = "block";#}
+            if (document.getElementById('mapIconsImageImg').src.localeCompare(window.location.href) !== 0 &&
+                document.getElementById('mapIconsImageImg').src.localeCompare("data:,") !== 0) {
+                return true;
+                {#win.document.write(document.getElementById('mapLinesImageImg').outerHTML);#}
+                {#document.getElementById('mapLinesImageImg').src = window.location.href;#}
+
+            } else {
+                setTimeout(printMapIcons, 250);
+            }
+        }
+
+        function enterFilterName(){
+            document.getElementById('modalNameForFilter').style.display = "block";
+        }
+
+        function storeFilter(){
+            if (document.getElementById('filterName').value !== "") {
+                const form = new FormData(document.querySelector("#filterForm"));
+                var keysToRemove = JSON.parse(document.getElementById("column_names").innerText.replace(/'/g, "\""));
+                for (var key in keysToRemove) form.delete(keysToRemove[key]);
+                var name = document.getElementById('filterName').value;
+                form.set("name", name);
+                fetch("http://127.0.0.1:8000/" + window.location.href.split("/")[3] + "/store_filter", {
+                    method: 'POST',
+                    body: form
+                }).then(response => response.json())
+                    .then(data => {
+                            if (data.confirmation === "OK") {
+                                document.getElementById("modalNameForFilterDiv").style.height = "200px";
+                                document.getElementById("modalNameForFilterError").style.display = "none";
+                                document.getElementById('modalNameForFilter').style.display = "none";
+                                window.location.href = getURLWithoutRetrievedFilter().concat("/").concat(name);
+                            }else{
+                                document.getElementById("modalNameForFilterDiv").style.height = "270px";
+                                document.getElementById("modalNameForFilterError").innerText = data.confirmation.join(", ");
+                                document.getElementById("modalNameForFilterError").style.display = "block";
+                            }
+                        }
+                    );
+            }else{
+                document.getElementById("modalNameForFilterDiv").style.height = "240px";
+                document.getElementById("modalNameForFilterError").innerText = "Please, introduce a name for the filter";
+                document.getElementById("modalNameForFilterError").style.display = "block";
+            }
+        }
+
+        function cancelStoring(){
+            document.getElementById("modalNameForFilterDiv").style.height = "200px";
+            document.getElementById("modalNameForFilterError").style.display = "none";
+            document.getElementById('modalNameForFilter').style.display = "none";
+        }
+
+        function hideTable() {
+            var x = document.getElementById("generalDivTable");
+            if (x.style.display === "none") {
+                document.getElementById("hideTable").innerText = "{% trans 'Hide table' %}";
+                x.style.display = "block";
+            } else {
+                document.getElementById("hideTable").innerText = "{% trans 'Show table' %}";
+                x.style.display = "none";
+            }
+        }
+
+        function getURLWithoutRetrievedFilter(){
+            var url_elements = window.location.href.split("/");
+            return window.location.href.split("/").slice(0,url_elements.indexOf('table') + 1).join("/");
+        }
+        function getCurrentFilter(){
+            var url_elements = window.location.href.split("/");
+            return (url_elements[url_elements.indexOf('table') + 1]).replace(/%20/g, " ");
+        }
+        function removeFilter(){
+            const form = new FormData(document.getElementById("formDelete"));
+            var name = getCurrentFilter();
+            form.set("name", name);
+            var confirmation = "ERROR";
+            fetch("http://127.0.0.1:8000/es/delete_filter", {
+                method: 'POST',
+                body: form
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.confirmation === "OK") {
+                        window.location.href = getURLWithoutRetrievedFilter();
+                    }
+                });
+        }
+        function updateFilter(){
+            const form = new FormData(document.querySelector("#filterForm"));
+            var keysToRemove = JSON.parse(document.getElementById("column_names").innerText.replace(/'/g, "\""));
+            for (var key in keysToRemove) form.delete(keysToRemove[key]);
+            var name = getCurrentFilter();
+            form.set("name", name);
+            fetch("http://127.0.0.1:8000/" + window.location.href.split("/")[3] + "/update_filter", {
+                method: 'POST',
+                body: form
+            }).then(response => response.json())
+                .then(data => {
+                        alert(data.confirmation);
+                    }
+                );
+        }
+
+
+    </script>
+    {#    <script>#}
+    {#        $( document ).ready(function() {#}
+    {#            document.getElementById("mainTable").style.display = "none";#}
+    {##}
+    {#        });#}
+    {#    </script>#}
+{% endblock %}

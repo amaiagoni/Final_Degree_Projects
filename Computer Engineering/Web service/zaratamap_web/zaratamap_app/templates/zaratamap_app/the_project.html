@@ -1,0 +1,54 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <div class="background-with-text">
+                        <img src="{% static 'images/the_project_background_2.jpg' %}" alt="The Project" class="img-fluid">
+                        <h1 class="text-in-top-of-image-regulation">{% trans 'The Project' %}</h1>
+                    </div>
+                </div>
+                <br>
+                <h3 class="text-center">{% trans 'Zaratamap: a new perspective on urban noise' %}</h3>
+                <div class="card-body profile-accordion">
+                    <p class="text-justify">{% blocktrans %}The project aims to design and develop a self-sufficient sonometer that captures overall noise levels, their A-Weighting equivalent and its correspondent octave-band dissociation. These related values will be obtained using IIR filters in a microcontroller, that will associate them to a specific time stamp and GPS location. These data frames will be transmitted to a time-series focused database running in a remote central server for its storage, specifically designed for the project, via Wi-Fi connection. The final sonometer device will be encapsulated for its placement in designed means of transport and will be calibrated using a professional sonometer to ensure data accuracy.{% endblocktrans %}</p>
+                    <div style="width: 100%; text-align: center">
+                        <div style="display: inline-block; margin: 0 auto;">
+                            <a class="btn btn-primary" href="{% url 'octaves' %}" >{% trans 'Learn more about filters' %}</a>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card-body profile-accordion">
+                    <p class="text-justify">{% blocktrans %}The essence of this project is to capture noise levels in a city in real time, obtaining much more data than the one gathered in the conventional method of generating noise maps. This currently used practice relies on public workers performing measurements with sonometers in predefined times and locations, limiting the noise representation of the city to those specifications. With the autonomous sonometer developed in this project, not only the number of data frames increases exponentially, but the variety of times and geo-positions they are made in do too.{% endblocktrans %}</p>
+                    <p class="text-justify">{% blocktrans %}Then,  for  data  transfer  from the embedded solution to a central server, a protocol definition will be put into practice, storing all the information  in a specialized  centralized database  system. This communication and storage scheme will provide  the  means for the  development  of  a GIS  technology,  mapping  noise  levels with GPS locations in a graphical outline.{% endblocktrans %}</p>
+                    <div style="width: 100%; text-align: center">
+                        <div style="display: inline-block; margin: 0 auto;">
+                                <a class="btn btn-primary" href="{% url 'table' %}" >{% trans 'I want a sneak peek: Get latest data!' %}</a>
+
+                        </div>
+                    </div>
+                </div>
+            <br>
+                <div class="card-body profile-accordion">
+                    <p class="text-justify">{% blocktrans %}The result will be a web service, that will provide different functionalities to the end user, having the graphical representation of data as the core behaviour. For  personalized representations, different filters will  be provided,  based on time frame (per day, week, month…), total noise level, octave or geographical localization of data. This feature will be expanded  into historical management of data and  specialized  report  generation,  with  the  ultimate objective  of  supporting  decision-making processes. Regarding the platform itself, it will maintain two user profiles, general public and private managers, providing expressly designed reports for both  of them. This functionality, coupled with an intuitive and multiplatform design of the  service, will transform  the accessibility of the  prevalent noise pollution information, under the umbrella of eco-friendly smart cities.{% endblocktrans %}</p>
+                    <div style="width: 100%; text-align: center">
+                        <div style="display: inline-block; margin: 0 auto;">
+                            {% if user.is_authenticated %}
+                                <a class="btn btn-primary" href="{% url 'table' %}" >{% trans 'Start using Zaratamap GIS Filters' %}</a>
+                            {% else %}
+                                <a class="btn btn-primary" href="{% url 'signup' %}" >{% trans 'Start using Zaratamap GIS Filters' %}</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

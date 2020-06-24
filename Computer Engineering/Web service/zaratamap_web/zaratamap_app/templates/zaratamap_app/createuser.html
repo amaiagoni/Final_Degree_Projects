@@ -1,0 +1,119 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <!-- ============================================================== -->
+        <!-- pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Create new administrator</h2>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- validation form -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Please, fill out the following form:</h5>
+                    <div class="card-body">
+                        <form class="needs-validation" action="{% url 'createuser' %}" method="post">
+                            {% csrf_token %}
+                            <div class="card-body border-top">
+                                <h5>{% trans 'Choose user type:' %}</h5>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" checked="" name="usertype" value="Zaratamap Administrator" class="custom-control-input"><span class="custom-control-label">{% trans 'Zaratamap Administrator' %}</span>
+                                </label>
+                                <label class="custom-control custom-radio custom-control-inline">
+                                    <input type="radio" name="usertype" value="IT Administrator" class="custom-control-input"><span class="custom-control-label">{% trans 'IT Administrator' %}</span>
+                                </label>
+                            </div>
+                            <div class="border-top">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustom01">{% trans 'First name' %}</label>
+                                    <input type="text" class="form-control" id="validationCustom01" name="first_name" placeholder="First name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustom02">{% trans 'Last name' %}</label>
+                                    <input type="text" class="form-control" id="validationCustom02" name="last_name" placeholder="Last name" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustomUsername">{% trans 'Username' %}</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="validationCustomUsername" name="username" placeholder="{% trans 'Username' %}" aria-describedby="inputGroupPrepend" required autocomplete="off">
+                                        <div class="invalid-feedback">
+                                            Please choose a username.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustomUsername">{% trans 'Email' %}</label>
+                                    <div class="input-group">
+                                        <input type="email" class="form-control" id="validationCustomUsername" name="email" placeholder="{% trans 'Email' %}" aria-describedby="inputGroupPrepend" required autocomplete="off">
+                                        <div class="invalid-feedback">
+                                            Please insert email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustomUsername">{% trans 'Password' %}</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="validationCustomUsername" name="password1" placeholder="{% trans 'Password' %}" aria-describedby="inputGroupPrepend" required autocomplete="off">
+                                        <div class="invalid-feedback">
+                                            Please choose a password.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <label for="validationCustomUsername">{% trans 'Confirm password' %}</label>
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" id="validationCustomUsername" name="password2" placeholder="{% trans 'Confirm password' %}" aria-describedby="inputGroupPrepend" required autocomplete="off">
+                                        <div class="invalid-feedback">
+                                            Please confirm password.
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                            <label class="form-check-label" for="invalidCheck">
+                                                {% trans 'By creating an account, you agree the' %} <a href="#" class="text-secondary">{% trans 'terms and conditions' %}</a>
+                                            </label>
+                                            <div class="invalid-feedback">
+                                                You must agree before submitting.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
+                                    <button class="btn btn-primary" type="submit">{% trans 'Register new user' %}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end validation form -->
+    <!-- ============================================================== -->
+{% endblock %}

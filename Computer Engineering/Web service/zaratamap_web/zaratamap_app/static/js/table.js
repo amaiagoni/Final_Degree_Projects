@@ -1,0 +1,10 @@
+$(function(){
+    $(".table-responsive_aux").scroll(function(){
+        $(".table-responsive")
+            .scrollLeft($(".table-responsive_aux").scrollLeft());
+    });
+    $(".table-responsive").scroll(function(){
+        $(".table-responsive_aux")
+            .scrollLeft($(".table-responsive").scrollLeft());
+    });
+});

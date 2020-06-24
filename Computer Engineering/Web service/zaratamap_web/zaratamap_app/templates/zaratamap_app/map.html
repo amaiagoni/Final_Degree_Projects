@@ -1,0 +1,144 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block vueImport %}
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <style>.map{width:100%;height:400px} .mapLines{width:100%;height:400px}
+    .tooltip, .tooltipLines {
+        position: relative;
+        padding: 3px;
+        background: rgba(0, 0, 0, 0.5);
+        color: white;
+        opacity: 0.7;
+        white-space: nowrap;
+        font: 10pt sans-serif;
+    }</style>
+    <link rel="stylesheet" href="{% static 'vendor/zaratamapcss/map.1f948dd0.css' %}">
+{% endblock %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
+                <div style="width: 100%; text-align: center; background-color:#5969ff;">
+                    <br>
+                    <form method="post" id="filterForm">
+                        {% csrf_token %}
+                        <label style="color: white">{% trans 'Get automatically refreshed data of the last' %}:&nbsp;</label>
+                        <select class="dropdown-map-options" name="refresh-time" id="refresh-time" onchange="updateInterval(this.value)">
+                            <option value="1">1 {% trans 'minute' %}</option>
+                            <option value="5">5 {% trans 'minutes' %}</option>
+                            <option value="30">30 {% trans 'minutes' %}</option>
+                            <option value="60">1 {% trans 'hour' %}</option>
+                            <option value="1440">24 {% trans 'hours' %}</option>
+                        </select>
+                        <br><br>
+                        <label style="color: white">{% trans 'For the Zaratamap city' %}:&nbsp;</label>
+                        <select class="dropdown-map-options" name="refresh-city">
+                            <option value="All">{% trans 'All' %}</option>
+                            {% for city in cities %}
+                                <option value="{{ city }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
+                    </form>
+                    <br>
+                    <div style="display: inline-block; margin: 0 auto;">
+                        <button class="btn btn-secondary" id="bStartRefreshing" onclick="refreshMap()" >{% trans 'Start' %}</button>
+                        <button class="btn btn-secondary" id="bStopRefreshing" onclick="stopRefreshing()" disabled>{% trans 'Stop' %}</button>
+                    </div>
+                    <br><br>
+                </div>
+
+                <br>
+                <div style="width: 100%; text-align: center">
+                    <div style="display: inline-block; margin: 0 auto;">
+{#                        <button class="btn btn-primary" id="showmap" onclick="myFunction()" >{% trans 'Hide map' %}</button>#}
+                        <button class="btn btn-primary" id="changemap" onclick="changeMap()">{% trans 'Change map' %}</button>
+                    </div>
+                </div>
+                <br>
+                <var id="zoom" hidden>{{ zoom }}</var>
+                <var id="center" hidden>{{ center }}</var>
+                <div id="tooltip" class="tooltip"></div>
+                <div id="tooltipLines" class="tooltipLines"></div>
+                <var id="geoJsonPoints" hidden>{"type": "FeatureCollection","features": []}</var>
+                <var id="points" hidden>{{ initialValues.points }}</var>
+                <div id="mapMainDiv" style="height: 400px">
+                    <div id="mapdiv" style="position:relative;z-index:5">
+                        <div id="map" class="map"></div>
+                    </div>
+                    <div id="mapLinesdiv" style="position:relative;z-index:3;top: -400px;">
+                        <div id="mapLines" class="mapLines"></div>
+                    </div>
+                </div>
+
+
+                <var id="geoJsonLines" hidden>{"type": "FeatureCollection","features": []}</var>
+                <!-- ============================================================== -->
+                <!-- end data table multiselects  -->
+                <!-- ============================================================== -->
+            </div>
+        </div>
+    </div>
+    <script type="module" src="{% static 'js/real_time_map.js' %}">    </script>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function myFunction() {
+            var x = document.getElementById("mapMainDiv");
+            if (x.style.display === "none") {
+                document.getElementById("showmap").innerText = "{% trans 'Hide map' %}";
+                document.getElementById("changemap").style.display = "inline-block";
+                x.style.display = "block";
+            } else {
+                document.getElementById("showmap").innerText = "{% trans 'Show map' %}";
+                document.getElementById("changemap").style.display = "none";
+                x.style.display = "none";
+            }
+        }
+        function changeMap() {
+            var y = document.getElementById("mapLinesdiv");
+            if (y.style.zIndex === "6") {
+                y.style.zIndex = "3";
+            } else {
+                y.style.zIndex = "6";
+            }
+        }
+        var intervalID;
+        var time_selector = document.getElementById("refresh-time")
+        var interval = parseInt(time_selector.options[time_selector.selectedIndex].value)*60000;
+        function refreshMap() {
+            document.getElementById("bStartRefreshing").disabled = true;
+            document.getElementById("bStopRefreshing").disabled = false;
+            retrieveData();
+            intervalID = setInterval(function () {
+                retrieveData();
+            }, interval);
+        }
+        function stopRefreshing(){
+            clearInterval(intervalID);
+            document.getElementById("bStartRefreshing").disabled = false;
+            document.getElementById("bStopRefreshing").disabled = true;
+        }
+        function updateInterval(value) {
+            refreshMap();
+            interval = parseInt(value)*60000;
+            refreshMap();
+        }
+        function retrieveData(){
+            const form = new FormData(document.querySelector("#filterForm"));
+            fetch("http://127.0.0.1:8000/es/refresh_map", {
+                method: 'POST',
+                body: form
+            }).then(response => response.json())
+                .then(data => {
+                    document.getElementById("geoJsonPoints").innerText = data.geoJsonPointsList;
+                    document.getElementById("geoJsonLines").innerText = data.geoJsonStreets;
+                });
+        }
+    </script>
+{% endblock %}

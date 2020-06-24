@@ -1,0 +1,51 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <div class="background-with-text">
+                        <img src="{% static 'images/contact_us_background.jpg' %}" alt="The Project" class="img-fluid">
+                        <h1 class="text-in-top-of-image">{% trans 'Contact Us' %}</h1>
+                    </div>
+                </div>
+                <!-- .card-body -->
+                <div class="card-body pt-2">
+                    <!-- .media -->
+                    <div class="media mb-3">
+                        <!-- .user-avatar -->
+                        <a class="user-avatar user-avatar-floated user-avatar-xl float-left mr-3">
+                            <img src="{% static 'images/amaia-goni.jpg' %}" alt="User Avatar" class="rounded-circle user-avatar-xl" style="position: absolute;top: 70%;">
+                        </a>
+                        <!-- /.user-avatar -->
+                        <!-- .media-body -->
+                        <br>
+                        <div class="media-body" style="padding-top: 100px;padding-left: 20px">
+                            <h1 class="card-title mb-2 text-truncate">
+                                Amaia Goñi Ardanaz
+                            </h1>
+                            <h4>{% trans 'Zaratamap developer' %}</h4>
+                            <h6 style="padding-top: 0px;" class="card-subtitle text-muted">amaiagoni@opendeusto.es</h6>
+
+                        </div>
+                        <!-- /.media-body -->
+                        <div style="padding-top: 110px">
+                            <a href="https://research.mobility.deustotech.eu/people/members/amaia-goni/" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-address-card"></i>&nbsp;&nbsp;{% trans 'Deustotech Mobility' %}</a>
+                            <br><br>
+                            <a href="https://www.linkedin.com/in/amaia-go%C3%B1i-ardanaz?originalSubdomain=es" class="btn btn-sm btn-secondary">
+                                <i class="fab fa-linkedin"></i>&nbsp;&nbsp;{% trans 'LinkedIn' %}</a>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div>
+                        <p class="text-justify">{% blocktrans %}Currently studying the double degree in Computer Science and Industrial Electronic and Automatic Engineering at University of Deusto (estimated end on June 2020). Since 2018, she collaborates in DeustoTech Mobility research team as a scholar, focusing on the development of V2V (Vehicle to Vehicle) and V2I (Vehicle to Infrastructure) communications.{% endblocktrans %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

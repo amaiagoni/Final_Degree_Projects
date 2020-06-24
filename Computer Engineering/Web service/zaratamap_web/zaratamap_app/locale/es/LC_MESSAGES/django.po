@@ -1,0 +1,591 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-12-17 23:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "time"
+msgstr "Hora"
+
+msgid "alt"
+msgstr "Altitud"
+
+msgid "dB"
+msgstr "dB"
+
+msgid "dBA"
+msgstr "dBA"
+
+msgid "lat"
+msgstr "Latitud"
+
+msgid "lon"
+msgstr "Longitud"
+
+msgid "o1000"
+msgstr "Octava 1000Hz"
+
+msgid "o125"
+msgstr "Octava 125Hz"
+
+msgid "o16000"
+msgstr "Octava 16000Hz"
+
+msgid "o2000"
+msgstr "Octava 2000Hz"
+
+msgid "o250"
+msgstr "Octava 250Hz"
+
+msgid "o31_5"
+msgstr "Octava 31.5Hz"
+
+msgid "o4000"
+msgstr "Octava 4000Hz"
+
+msgid "o500"
+msgstr "Octava 500Hz"
+
+msgid "o63"
+msgstr "Octava 63Hz"
+
+msgid "o8000"
+msgstr "Octava 8000Hz"
+
+msgid "date"
+msgstr "Fecha"
+
+msgid "Show map"
+msgstr "Mostrar mapa"
+
+msgid "Hide map"
+msgstr "Ocultar mapa"
+
+msgid "Generate PDF or print"
+msgstr "Generar PDF o imprimir"
+
+msgid "Please enter your user information"
+msgstr "Introduzca su información de usuario"
+
+msgid "Username"
+msgstr "Usuario"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Remember me"
+msgstr "Recuérdeme"
+
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+msgid "Create An Account"
+msgstr "Crear cuenta"
+
+msgid "Forgot Password"
+msgstr "Contraseña olvidada"
+
+msgid "Registrations Form"
+msgstr "Formulario de registro"
+
+msgid "Email"
+msgstr "Correo electrónico"
+
+msgid "Confirm password"
+msgstr "Confirmar contraseña"
+
+msgid "Register My Account"
+msgstr "Registrar mi cuenta"
+
+msgid "By creating an account, you agree the"
+msgstr "Creando la cuenta, accedes a los"
+
+msgid "terms and conditions"
+msgstr "términos y condiciones"
+
+msgid "Already a member?"
+msgstr "¿Ya eres miembro?"
+
+msgid "Login Here"
+msgstr "Entra aquí"
+
+msgid "Choose user type:"
+msgstr "Escoja el tipo de usuario:"
+
+msgid "Zaratamap Administrator"
+msgstr "Administrador Zaratamap"
+
+msgid "IT Administrator"
+msgstr "Administrador Dpto. TI"
+
+msgid "First name"
+msgstr "Nombre"
+
+msgid "Last name"
+msgstr "Apellido"
+
+msgid "Register new user"
+msgstr "Registrar nuevo usuario"
+
+msgid "Register new admin user"
+msgstr "Registrar administrador"
+
+msgid "Table"
+msgstr "Tabla"
+
+msgid "Font size"
+msgstr "Tamaño de la letra"
+
+msgid "Displayed date and time"
+msgstr "Valores temporales mostrados"
+
+msgid "Displayed coordinates"
+msgstr "Coordenadas mostradas"
+
+msgid "Displayed overall noise levels"
+msgstr "Niveles de ruido mostrados"
+
+msgid "Displayed octaves"
+msgstr "Octavas mostradas"
+
+msgid "Timeframe"
+msgstr "Periodo"
+
+msgid "Noise levels"
+msgstr "Nivel de ruido"
+
+msgid "Geo-position"
+msgstr "Geo-posición"
+
+msgid "Vehicle"
+msgstr "Vehículo"
+
+msgid "Pick date"
+msgstr "Escoja fecha"
+
+msgid "Pick time"
+msgstr "Escoja hora"
+
+msgid "From"
+msgstr "Desde"
+
+msgid "To"
+msgstr "Hasta"
+
+msgid "Noise level range"
+msgstr "Rango de nivel de ruido"
+
+msgid "Only levels above"
+msgstr "Solo niveles superiores a"
+
+msgid "Maximum night level (50 dB)"
+msgstr "Nivel máximo de noche (50 dB)"
+
+msgid "Maximum day level (55 dB)"
+msgstr "Nivel máximo de día (55 dB)"
+
+msgid "Search by street"
+msgstr "Buscar por calle"
+
+msgid "Search by coordinates"
+msgstr "Buscar por coordenadas"
+
+msgid "Street name"
+msgstr "Nombre de la calle"
+
+msgid "Longitude"
+msgstr "Longitud"
+
+msgid "Latitude"
+msgstr "Latitud"
+
+msgid "Surrounding km"
+msgstr "Km a la redonda"
+
+msgid "Search for vehicle"
+msgstr "Buscar por vehículo"
+
+msgid "Bicycle"
+msgstr "Bicicleta"
+
+msgid "Public Bus"
+msgstr "Autobús urbano"
+
+msgid "OTA Car"
+msgstr "Coche OTA"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Add extra vehicle"
+msgstr "Añadir vehículo adicional"
+
+msgid "More about"
+msgstr "Más sobre"
+
+msgid "My Profile"
+msgstr "Mi Perfil"
+
+msgid "My Filters"
+msgstr "Mis Filtros"
+
+msgid "New filter"
+msgstr "Nuevo filtro"
+
+msgid "Real time data"
+msgstr "Datos en tiempo real"
+
+msgid "Noise Regulation"
+msgstr "Regulación del ruido"
+
+msgid "Consequences of noise"
+msgstr "Efectos del ruido"
+
+msgid "Noise filters"
+msgstr "Filtros de ruido"
+
+msgid "Contact Us"
+msgstr "Contáctanos"
+
+msgid "The Project"
+msgstr "El Proyecto"
+
+msgid "Citizen"
+msgstr "Ciudadano"
+
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+msgid "Anonymous"
+msgstr "Anónimo"
+
+msgid "Table configuration"
+msgstr "Configuración de tabla"
+
+msgid "Ya existe Filter con este Name."
+msgstr "Ya existe un filtro con este nombre. Por favor, introduzca uno nuevo."
+
+msgid "Your password has been successfully updated."
+msgstr "Su contraseña ha sido actualizada con éxito."
+
+msgid "Your email has been successfully updated."
+msgstr "Su correo electrónico ha sido actualizado con éxito."
+
+msgid "Your password was entered incorrectly. Please enter it again."
+msgstr "Su contraseña es incorrecta. Por favor, vuelva a introducirla."
+
+msgid "Change email"
+msgstr "Cambiar correo electrónico"
+
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+msgid "New email"
+msgstr "Nuevo correo electrónico"
+
+msgid "Current password"
+msgstr "Contraseña actual"
+
+msgid "New password"
+msgstr "Nueva contraseña"
+
+msgid "New password confirmation"
+msgstr "Confirmación de nueva contraseña"
+
+msgid "Please, upload a valid image."
+msgstr "Por favor, seleccione una imagen válida."
+
+msgid "Change image"
+msgstr "Cambiar imagen"
+
+msgid "Upload image"
+msgstr "Subir imagen"
+
+msgid "Server Unavailable"
+msgstr "Servidor no disponible"
+
+msgid "Sorry! It seems that Zaratamap noise server is temporarily unavailable. Please, try again later."
+msgstr "¡Lo sentimos! Parece que el servidor de ruido Zaratamap se encuentra temporalmente fuera de servicio. Por favor, inténtelo más tarde."
+
+msgid "Back to homepage"
+msgstr "Volver a inicio"
+
+msgid "Get automatically refreshed data of the last"
+msgstr "Obtener datos automáticamente refrescados de hace"
+
+msgid "minute"
+msgstr "minuto"
+
+msgid "minutes"
+msgstr "minutos"
+
+msgid "hour"
+msgstr "hora"
+
+msgid "hours"
+msgstr "horas"
+
+msgid "For the Zaratamap city"
+msgstr "Para la ciudad Zaratamap"
+
+msgid "All"
+msgstr "Todas"
+
+msgid "Start"
+msgstr "Iniciar"
+
+msgid "Stop"
+msgstr "Parar"
+
+msgid "Change map"
+msgstr "Cambiar mapa"
+
+msgid "Filter successfully updated."
+msgstr "El filtro ha sido actualizado con éxito."
+
+msgid "Something went wrong when updating filter. The filter was deleted from the database."
+msgstr "Algo ha ocurrido actualizando el filtro. Este se ha eliminado de la base de datos."
+
+msgid "Filter could not be updated, please try again."
+msgstr "El filtro no ha podido ser actualizado, por favor, inténtelo de nuevo."
+
+msgid "Zaratamap menu"
+msgstr "Menú Zaratamap"
+
+msgid "class"
+msgstr "Clase"
+
+msgid "Welcome to Zaratamap!"
+msgstr "¡Bienvenido a Zaratamap!"
+
+msgid "Concerned with urban noise pollution and seeking the perfect well-being in our cities, we have created a new noise measuring paradigm. Based on intelligent sonometers, spread across multiple vehicles in our society, we have created a new dynamic noise map generation system, ready for our users to enjoy. Want to find out more?"
+msgstr "Concienciados con la contaminación de ruido en entornos urbanos y buscando la mejor calidad de vida en nuestras ciudades, hemos creado un nuevo paradigma de medición de ruido. Basado en sonómetros inteligentes, distribuidos en varios vehículos de nuestra sociedad, hemos creado un nuevo sistea de generación de mapas de ruido dinámicos, listos para el disfrute de nuestros usuarios. ¿Quiere conocer más?"
+
+msgid "En el 7º Programa General de Acción de la UE, Vivir bien, respetando los límites de  nuestro  planeta,  se  pretende  que  la  mayor  parte  de  los  ciudadanos  que  vivan  en  áreas urbanas estén expuestos a ruidos en niveles por debajo de 55 dB diarios y 50 dB nocturnos. La UE no tiene competencias en legislación sobre  ruido, pero obliga a las autoridades a facilitar información pública sobre el impacto del ruido y a consultar a los ciudadanos sobre las medidas que tengan previsto adoptar para hacer frente a la contaminación acústica. Así, los ciudadanos pueden apreciar si las medidas adoptadas están aportando mejoras reales y ponerse en contacto con sus representantes en caso necesario. Para ello, se insta a las autoridades competentes a:"
+msgstr "En el 7º Programa General de Acción de la UE, Vivir bien, respetando los límites de  nuestro  planeta,  se  pretende  que  la  mayor  parte  de  los  ciudadanos  que  vivan  en  áreas urbanas estén expuestos a ruidos en niveles por debajo de 55 dB diarios y 50 dB nocturnos. La UE no tiene competencias en legislación sobre  ruido, pero obliga a las autoridades a facilitar información pública sobre el impacto del ruido y a consultar a los ciudadanos sobre las medidas que tengan previsto adoptar para hacer frente a la contaminación acústica. Así, los ciudadanos pueden apreciar si las medidas adoptadas están aportando mejoras reales y ponerse en contacto con sus representantes en caso necesario. Para ello, se insta a las autoridades competentes a:"
+
+msgid "Preparar mapas de ruido para determinar exposición a fuentes (industria, transporte…)"
+msgstr "Preparar mapas de ruido para determinar exposición a fuentes (industria, transporte…)"
+
+msgid "Los  mapas  sirven  como  base  para  la  adopción  de  planes  globales  diseñados  para prevenir y reducir la exposición, legislación nacional vinculante"
+msgstr "Los  mapas  sirven  como  base  para  la  adopción  de  planes  globales  diseñados  para prevenir y reducir la exposición, legislación nacional vinculante"
+
+msgid "Los planes globales están relacionados con políticas de regulación de gestión de tráfico y promoción del uso de transportes eco-friendly"
+msgstr "Los planes globales están relacionados con políticas de regulación de gestión de tráfico y promoción del uso de transportes eco-friendly"
+
+msgid "Noise: the forgotten pollution"
+msgstr "Ruido: la contaminación olvidada"
+
+msgid "Social impact"
+msgstr "Impacto social"
+
+msgid "Globalization and internationalization have caused a fast increase in the number of people moving to urban areas. United Nations estimates that 55.3% of the total worldwide population in 2018 lived in cities, percentage expected to grow to 60% by 2030. The situation requires the establishment of an adequate growth-management in those the areas, focused on ensuring a high life-quality for the inhabitants. This responsibility devolves upon local authorities, that need to update its facilities and services through well-established action plans. This change in paradigm is developed under the umbrella of modern Smart Cities."
+msgstr "La globalización y la internacionalización han provocado un rápido aumento en el número de personas que se mudan a las zonas urbanas. Las Naciones Unidas estiman que el 55.3%% de la población mundial total en 2018 vivía en ciudades, porcentaje que se espera que crezca a 60%% para 2030. La situación requiere el establecimiento de una adecuada gestión del crecimiento en esas áreas, enfocada en asegurar una alta calidad de vida para los habitantes. Esta responsabilidad recae sobre las autoridades locales, que necesitan actualizar sus instalaciones y servicios a través de planes de acción bien establecidos. Este cambio de paradigma se desarrolla bajo el paraguas de las Smart Cities modernas."
+
+msgid "More specifically, an inevitable consequence of the increase of inner-city population is the escalation of acoustic pollution. The higher the citizenry, the higher the number of sources that contribute to this contamination: traffic, industrial activity, nightlife…"
+msgstr "Más específicamente, una consecuencia inevitable del aumento de la población del centro de la ciudad es la escalada de la contaminación acústica. Cuanto mayor sea la ciudadanía, mayor será el número de fuentes que contribuyen a esta contaminación: tráfico, actividad industrial, vida nocturna ... "
+
+msgid "The essential purpose of this project is to build a sonometer that can dynamically produce noise maps for their analysis. The interpretation of these reports is a highly useful mechanism for the authorities to take ethical and effective actions for the management of sound pollution, pursuing to improve both the human and the environment's  health."
+msgstr "El propósito esencial de este proyecto es construir un sonómetro que pueda producir dinámicamente mapas de ruido para su análisis. La interpretación de estos informes es un mecanismo muy útil para que las autoridades tomen medidas éticas y efectivas para el manejo de la contaminación acústica, con el objetivo de mejorar la salud humana y del medio ambiente."
+
+msgid "As a matter of fact, noise is not usually socially acknowledged as a pollutant agent, and because of that, there is no general perception of its detrimental consequences. In reality, the World Health Organization alerts that excess exposure to high ambient noise can be harmful to human health, interfering in its everyday activities. Concretely,  exposition to high levels of noise has been proven to manifest in auditive loss, cardiovascular illnesses, cognitive and sleep disorders, stress, changes in social interactions or low productivity."
+msgstr "De hecho, el ruido no suele ser reconocido socialmente como un agente contaminante y, por eso, no existe una percepción general de sus consecuencias perjudiciales. En realidad, la Organización Mundial de la Salud advierte que la exposición excesiva al ruido ambiental elevado puede ser perjudicial para la salud humana e interferir en sus actividades diarias. Concretamente, se ha demostrado que la exposición a altos niveles de ruido se manifiesta en pérdida auditiva, enfermedades cardiovasculares, trastornos cognitivos y del sueño, estrés, cambios en las interacciones sociales o baja productividad."
+
+msgid "Particularly, a ranking carried out by the World Health Organization in 2016 positioned Spain as the second noisiest country in the world, with approximately nine million of Spanish citizens being exposed to more than the WHO's daily recommended maximum of 65 dBs."
+msgstr "En particular, una clasificación realizada por la Organización Mundial de la Salud en 2016 posicionó a España como el segundo país más ruidoso del mundo, con aproximadamente nueve millones de ciudadanos españoles expuestos a más del máximo diario recomendado por la OMS de 65 dBs."
+
+msgid "Therefore, the WHO alerts of the importance of authorities taking action to handle noise pollution, stating that it is the second cause of disease due to environmental reasons. In this circumstances, the device developed in this project can have a extensive ethical benefit, providing information to authorities for a better noise related action planning and visibility of the issue to the general public."
+msgstr "Por lo tanto, la OMS alerta sobre la importancia de que las autoridades tomen medidas para manejar la contaminación acústica, afirmando que es la segunda causa de enfermedad debido a razones ambientales. En estas circunstancias, el dispositivo desarrollado en este proyecto puede tener un amplio beneficio ético, proporcionando información a las autoridades para una mejor planificación de acciones relacionadas con el ruido y visibilidad del problema para el público en general."
+
+msgid "Environmental impact"
+msgstr "Impacto medioambiental"
+
+msgid "Humans are not the only environment actors that can benefit from this project. Noise pollution is a primary cause for fauna movement, as animals escape from high sounds that affect their natural activity. The migration of these creatures also implies the migrations of their predators, and, ultimately, the transformation of a whole area's flora, ground and landscapes."
+msgstr "Los humanos no son los únicos actores ambientales que pueden beneficiarse de este proyecto. La contaminación acústica es una causa principal del movimiento de la fauna, ya que los animales escapan de los sonidos fuertes que afectan su actividad natural. La migración de estas criaturas también implica las migraciones de sus depredadores y, en última instancia, la transformación de la flora, el suelo y los paisajes de toda una zona."
+
+msgid "Additionally, loud noise exposition has other particular negative effects in both animal and vegetable life. For example, it interferes with pollination activities and seed propagation, drowns out mating calls of some species and can block listening for prey localization."
+msgstr "Además, la exposición a ruidos fuertes tiene otros efectos negativos particulares en la vida animal y vegetal. Por ejemplo, interfiere con las actividades de polinización y la propagación de semillas, ahoga las llamadas de apareamiento de algunas especies y puede bloquear la escucha de la localización de presas."
+
+msgid "The execution of this project would translate into a future state with more effective, specific and targeted laws and procedures regarding noise. Under these circumstances, noise pollution could decrease gradually, stopping its unfavorable impact on living beings and their environment."
+msgstr "La ejecución de este proyecto se traduciría en un estado futuro con leyes y procedimientos más efectivos, específicos y focalizados con respecto al ruido. En estas circunstancias, la contaminación acústica podría disminuir gradualmente, deteniendo su impacto desfavorable en los seres vivos y su entorno."
+
+msgid "Regarding the environmental impact of the constructed physical device itself, it is considered that, designed as a tool whose ultimate purpose is to improve human health and environment pollution related policies management, the solution proposed needs to be as environmentally friendly as possible. On those grounds, low power consumption and modularity requirements have been dictated for the final product, ensuring a purposeful and eco-friendly device is built."
+msgstr "Con respecto al impacto ambiental del propio dispositivo físico construido, se considera que, diseñado como una herramienta cuyo propósito final es mejorar la gestión de políticas relacionadas con la salud humana y la contaminación ambiental, la solución propuesta debe ser lo más ecológica posible. Por esos motivos, se han dictado requisitos de bajo consumo de energía y modularidad para el producto final, asegurando que se construya un dispositivo útil y ecológico."
+
+msgid "Economic impact"
+msgstr "Impacto económico"
+
+msgid "Acoustic pollution turns into not only inhabitant and environmental discomfort, but also into high costs for public administrations. Under these circumstances, noise becomes a serious concern of public managers in Smart Cities, where the need for the design and establishment of action plans to deal with sound pollution arises. In this regard, there is a compelling need for geo-located real-time monitorization of noise in metropolises, storing all data for its study, aiming to provide key knowledge in the process of designing the aforementioned action plans."
+msgstr "La contaminación acústica se convierte no solo en molestias para los habitantes y el medio ambiente, sino también en altos costos para las administraciones públicas. En estas circunstancias, el ruido se convierte en una seria preocupación de los administradores públicos en Smart Cities, donde surge la necesidad de diseñar y establecer planes de acción para hacer frente a la contaminación acústica. En este sentido, existe una necesidad imperiosa de una monitorización del ruido en tiempo real geo-ubicada en las metrópolis, almacenando todos los datos para su estudio, con el objetivo de proporcionar conocimiento clave en el proceso de diseño de los planes de acción antes mencionados."
+
+msgid "In this context, the 2002/49/EC (END) Directive signed by the European Parliament, that refers to the evaluation and management of ambient noise, was established; with the objective of avoiding, preventing or decreasing the damaging effects of noise introduced earlier in this document. For that purpose, it enacts the regulation to produce and update each city’s noise map every five years. In detail, these noise maps are requested to provide information about the changes in ambient conditions that may have occurred during that period."
+msgstr "En este contexto, se estableció la Directiva 2002/49/EC (END) firmada por el Parlamento Europeo, que se refiere a la evaluación y gestión del ruido ambiental; con el objetivo de evitar, prevenir o disminuir los efectos dañinos del ruido introducido anteriormente en este documento. Para ese propósito, promulga la regulación para producir y actualizar el mapa de ruido de cada ciudad cada cinco años. En detalle, se solicita a estos mapas de ruido que proporcionen información sobre los cambios en las condiciones ambientales que pueden haber ocurrido durante ese período."
+
+msgid "The standard approach undertaken by authorities to perform this task nowadays is to record and process the information manually. One or more public workers are commissioned to travel across predefined points in the city, using high-prized, specialized equipment to register noise measurements. This is an expensive and time-consuming practice that has a significant impact on the cities’ public expenses."
+msgstr "El enfoque estándar adoptado por las autoridades para realizar esta tarea hoy en día es registrar y procesar la información manualmente. Uno o más trabajadores públicos tienen el encargo de viajar a través de puntos predefinidos de la ciudad, utilizando equipos especializados y de gran valor para registrar las mediciones de ruido. Esta es una práctica costosa y lenta que tiene un impacto significativo en los gastos públicos de las ciudades."
+
+msgid "In addition, this methodology can be unrepresentative of reality, because, measurements carried out in one specific point, at a specific time, are not illustrative of other places in the same street or the noise level at other times of the day or periods of the year. In consequence, the high prized methodology used to perform the compulsory measurements can be inefficient, and ultimately, unjustifiable. In fact, the unrepresentativeness of the generated noise maps can be escalated to even more expensive projects, that without the right information, would fell on deaf ears."
+msgstr "Además, esta metodología puede no ser representativa de la realidad, porque las mediciones realizadas en un punto específico, en un momento específico, no ilustran otros lugares en la misma calle o el nivel de ruido en otros momentos del día o períodos del año. En consecuencia, la metodología altamente valorada utilizada para realizar las mediciones obligatorias puede ser ineficiente y, en última instancia, injustificable. De hecho, la falta de representación de los mapas de ruido generados se puede escalar a proyectos aún más caros, que sin la información correcta, caerían en oídos sordos."
+
+msgid "On this basis, this final degree project is expected to solve the problems regarding noise monitorization in urban areas, providing the authorities with a low-cost tool that allows them to have dynamic noise maps of the city. With them, concerned powers would be able to take the best possible actions to improve their inhabitants’ health and comfort, saving valuable public money and resources, that could be applied to other crucial actions."
+msgstr "Sobre esta base, se espera que este proyecto de fin de grado resuelva los problemas relacionados con la monitorización del ruido en áreas urbanas, proporcionando a las autoridades una herramienta de bajo costo que les permita tener mapas dinámicos de ruido de la ciudad. Con ellos, los poderes interesados ​​podrían tomar las mejores acciones posibles para mejorar la salud y la comodidad de sus habitantes, ahorrando valioso dinero y recursos públicos, que podrían aplicarse a otras acciones cruciales."
+
+msgid "Zaratamap developer"
+msgstr "Desarrolladora Zaratamap"
+
+msgid "Currently studying the double degree in Computer Science and Industrial Electronic and Automatic Engineering at University of Deusto (estimated end on June 2020). Since 2018, she collaborates in DeustoTech Mobility research team as a scholar, focusing on the development of V2V (Vehicle to Vehicle) and V2I (Vehicle to Infrastructure) communications."
+msgstr "Actualmente cursando la doble titulación en Ingeniería Informática e Ingeniería Electrónica Industrial y Automática en la Universidad de Deusto (finalización estimada en junio de 2020). Desde 2018, colabora en el equipo de investigación de DeustoTech Mobility como académica, centrándose en el desarrollo de comunicaciones V2V (Vehículo a Vehículo) y V2I (Vehículo a Infraestructura)."
+
+msgid "Some definitions..."
+msgstr "Algunas definiciones..."
+
+msgid "Audio analysis"
+msgstr "Análisis de audio"
+
+msgid "A-Weighting"
+msgstr "Ponderación A"
+
+msgid "Octave-band"
+msgstr "Banda de octava"
+
+msgid "Audio analysis applies to the extraction of useful data from the digital codification of an electric signal representing an acoustic wave. Its objective is to obtain information from the wave to perform an analysis, classification, collection..."
+msgstr "El análisis de audio se aplica a la extracción de datos útiles de la codificación digital de una señal eléctrica que representa una onda acústica. Su objetivo es obtener información de la onda para realizar un análisis, clasificación, recopilación ... "
+
+msgid "Human hearing range is composed by all frequencies that can be discerned by humans. This range varies from person to person, and is shortened with age. As an abstract generalization, all frequencies between 20 and 20000 Hz are considered audible. However, two sounds with the same intensity (usually measured in dBs) are not perceived as loud if they have different frequencies, as human sensitivity to sound varies with frequency. This phenomena is studied using specialized graphs called Equal-loudness contours, that measure sound pressure (in dB SPL) over frequencies inside the hearing range, for which a person recognizes different pure tones to have a steady loudness. Consequently, all points in a Equal-loudness contour will have the same perception, called sonority, measured in phons, reference measurement unit in these analysis. The most popular curve is called A-weighting, internationally defined in the IEC 61672:2003 standard."
+msgstr "El rango de audición humana está compuesto por todas las frecuencias que los humanos pueden discernir. Este rango varía de persona a persona y se acorta con la edad. Como una generalización abstracta, todas las frecuencias entre 20 y 20000 Hz se consideran audibles. Sin embargo, dos sonidos con la misma intensidad (generalmente medidos en dB) no se perciben como fuertes si tienen frecuencias diferentes, ya que la sensibilidad humana al sonido varía con la frecuencia. Este fenómeno se estudia utilizando gráficos especializados llamados contornos de igual volumen, que miden la presión del sonido (en dB SPL) sobre las frecuencias dentro del rango de audición, para las cuales una persona reconoce diferentes tonos puros como volumen constante. En consecuencia, todos los puntos en un contorno de igual volumen tendrán la misma percepción, llamada sonoridad, medida en phons, unidad de medida de referencia en estos análisis. La curva más popular se llama ponderación A, definida internacionalmente en el estándar IEC 61672: 2003."
+
+msgid "In audio analysis, the audible spectrum can be divided into octave bands, defined as frequency bands whose highest frequency is two times the lowest one. Additionally, in deeper studies, these octaves can be divided into factors, being the most common ones one-third octaves, where original octaves are divided into three equal segments. For the most part, audio analyses divide audible frequencies into a finite number of octaves, repeatedly 10, named and known by their central frequencies."
+msgstr "En el análisis de audio, el espectro audible se puede dividir en bandas de octava, definidas como bandas de frecuencia cuya frecuencia más alta es dos veces la más baja. Además, en estudios más profundos, estas octavas se pueden dividir en factores, siendo las más comunes un tercio de octavas, donde las octavas originales se dividen en tres segmentos iguales. En su mayor parte, los análisis de audio dividen las frecuencias audibles en un número finito de octavas, repetidamente 10, nombradas y conocidas por sus frecuencias centrales."
+
+msgid "Explore the filter frequency responses with our interactive chart!"
+msgstr "¡Explora las respuestas en frecuencia de los filtros con nuestro gráfico interactivo!"
+
+msgid "Como estado, es el encargado de enviar la información de mapas de ruido, población expuesta, planes de acción… a la Comisión Europea según la directiva 2002/49/CE. La legislación estatal  sólo  es  aplicable  a  determinados  emisores  acústicos:  actividades  comerciales, industriales o de servicio y sus instalaciones, carreteras, ferrocarriles, puertos y aeropuertos de competencia del estado, actividades militares y ámbito laboral. Para ello, se establece una serie de niveles máximos de contaminación acústica tolerables, referentes a una zonificación acústica establecida. Los valores límite de inmisión de ruido y de ruido transmitido a locales colindantes se dividen por tipo de actividad, tipo de área acústica (para lo que es importante hacer primero una zonificación) y hora del día (7-19 Día; 19-23 Tarde; 23-7 Noche). Estos valores se establecen como su equivalente ponderado de la curva A, y para el resto de las actividades son 55 dB de día y 50 dB de noche. Acciones a tomar cuando molesta otro tipo de ruido:"
+msgstr "Como estado, es el encargado de enviar la información de mapas de ruido, población expuesta, planes de acción… a la Comisión Europea según la directiva 2002/49/CE. La legislación estatal  sólo  es  aplicable  a  determinados  emisores  acústicos:  actividades  comerciales, industriales o de servicio y sus instalaciones, carreteras, ferrocarriles, puertos y aeropuertos de competencia del estado, actividades militares y ámbito laboral. Para ello, se establece una serie de niveles máximos de contaminación acústica tolerables, referentes a una zonificación acústica establecida. Los valores límite de inmisión de ruido y de ruido transmitido a locales colindantes se dividen por tipo de actividad, tipo de área acústica (para lo que es importante hacer primero una zonificación) y hora del día (7-19 Día; 19-23 Tarde; 23-7 Noche). Estos valores se establecen como su equivalente ponderado de la curva A, y para el resto de las actividades son 55 dB de día y 50 dB de noche. Acciones a tomar cuando molesta otro tipo de ruido:"
+
+msgid "Ruidos  vecinales:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica. El límite lo marcará la Ordenanza."
+msgstr "Ruidos  vecinales:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica. El límite lo marcará la Ordenanza."
+
+msgid "Ruido de actividades:  Consultar Ordenanza Municipal del Ayuntamiento o Legislación Autonómica o RD 1367/2007. El límite es de < 30 dBA para la noche."
+msgstr "Ruido de actividades:  Consultar Ordenanza Municipal del Ayuntamiento o Legislación Autonómica o RD 1367/2007. El límite es de < 30 dBA para la noche."
+
+msgid "Ruido  de  ocio:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica  o  RD  1367/2007.  Consultar  las  secciones  Zonas  Acústicas  Saturadas  u Objetivos de Calidad Acústica."
+msgstr "Ruido  de  ocio:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica  o  RD  1367/2007.  Consultar  las  secciones  Zonas  Acústicas  Saturadas  u Objetivos de Calidad Acústica."
+
+msgid "Ruido  excluido:  Las  actividades  militares  y  ruido  en  el  puesto  de  trabajo  quedan excluidas de la ley 37/2003, y tienen reglamento específico."
+msgstr "Ruido  excluido:  Las  actividades  militares  y  ruido  en  el  puesto  de  trabajo  quedan excluidas de la ley 37/2003, y tienen reglamento específico."
+
+msgid "Se encarga de la zonificación del territorio. Se obliga a los municipios  de más de 100.000 habitantes, a los titulares de infraestructuras viarias de más de 6000 veh IMD, y, en el caso del ferrocarril, al transporte de mercancías, a la realización de mapas de ruido y planes para actuar sobre las zonas prioritarias. Tiene competencias sobre los siguientes, que deben pedir permisos para poder llevar a cabo su labor:"
+msgstr "Se encarga de la zonificación del territorio. Se obliga a los municipios  de más de 100.000 habitantes, a los titulares de infraestructuras viarias de más de 6000 veh IMD, y, en el caso del ferrocarril, al transporte de mercancías, a la realización de mapas de ruido y planes para actuar sobre las zonas prioritarias. Tiene competencias sobre los siguientes, que deben pedir permisos para poder llevar a cabo su labor:"
+
+msgid "Infraestructuras viarias, ferroviarias y portuarias de competencia autonómica o foral"
+msgstr "Infraestructuras viarias, ferroviarias y portuarias de competencia autonómica o foral"
+
+msgid "Actividades y obras a licencia, autorización, comunicación o declaración responsable"
+msgstr "Actividades y obras a licencia, autorización, comunicación o declaración responsable"
+
+msgid "Viales urbanos"
+msgstr "Viales urbanos"
+
+msgid "Obras en la vía pública"
+msgstr "Obras en la vía pública"
+
+msgid "Zaratamap: a new perspective on urban noise"
+msgstr "Zaratamap: una nueva perspectiva de ruido urbano"
+
+msgid "The project aims to design and develop a self-sufficient sonometer that captures overall noise levels, their A-Weighting equivalent and its correspondent octave-band dissociation. These related values will be obtained using IIR filters in a microcontroller, that will associate them to a specific time stamp and GPS location. These data frames will be transmitted to a time-series focused database running in a remote central server for its storage, specifically designed for the project, via Wi-Fi connection. The final sonometer device will be encapsulated for its placement in designed means of transport and will be calibrated using a professional sonometer to ensure data accuracy."
+msgstr "El proyecto tiene como objetivo diseñar y desarrollar un sonómetro autosuficiente que capture los niveles generales de ruido, su equivalente de ponderación A y su correspondiente disociación de banda de octava. Estos valores relacionados se obtendrán utilizando filtros IIR en un microcontrolador, que los asociará a una marca de tiempo y ubicación GPS específicas. Estos marcos de datos se transmitirán a una base de datos centrada en series temporales que se ejecuta en un servidor central remoto para su almacenamiento, específicamente diseñado para el proyecto, a través de una conexión Wi-Fi. El dispositivo de sonómetro final se encapsulará para su colocación en medios de transporte considerados y se calibrará utilizando un sonómetro profesional para garantizar la precisión de los datos."
+
+msgid "Learn more about filters"
+msgstr "Aprender más sobre los filtros"
+
+msgid "The essence of this project is to capture noise levels in a city in real time, obtaining much more data than the one gathered in the conventional method of generating noise maps. This currently used practice relies on public workers performing measurements with sonometers in predefined times and locations, limiting the noise representation of the city to those specifications. With the autonomous sonometer developed in this project, not only the number of data frames increases exponentially, but the variety of times and geo-positions they are made in do too."
+msgstr "La esencia de este proyecto es capturar los niveles de ruido en una ciudad en tiempo real, obteniendo muchos más datos que los recopilados en el método convencional de generación de mapas de ruido. Esta práctica actualmente utilizada depende de que los trabajadores públicos realicen mediciones con sonómetros en tiempos y lugares predefinidos, lo que limita la representación del ruido de la ciudad a esas especificaciones. Con el sonómetro autónomo desarrollado en este proyecto, no solo el número de marcos de datos aumenta exponencialmente, sino también la variedad de tiempos y posiciones geográficas en las que se realizan."
+
+msgid "Then,  for  data  transfer  from the embedded solution to a central server, a protocol definition will be put into practice, storing all the information  in a specialized  centralized database  system. This communication and storage scheme will provide  the  means for the  development  of  a GIS  technology,  mapping  noise  levels with GPS locations in a graphical outline."
+msgstr "Luego, para la transferencia de datos desde la solución integrada a un servidor central, se pondrá en práctica una definición de protocolo que almacenará toda la información en un sistema de base de datos centralizado especializado. Este esquema de comunicación y almacenamiento proporcionará los medios para el desarrollo de una tecnología SIG, mapeando los niveles de ruido con ubicaciones GPS en un esquema gráfico."
+
+msgid "I want a sneak peek: Get latest data!"
+msgstr "Quiero una muestra: ¡Obtén los últimos datos!"
+
+msgid "The result will be a web service, that will provide different functionalities to the end user, having the graphical representation of data as the core behaviour. For  personalized representations, different filters will  be provided,  based on time frame (per day, week, month…), total noise level, octave or geographical localization of data. This feature will be expanded  into historical management of data and  specialized  report  generation,  with  the  ultimate objective  of  supporting  decision-making processes. Regarding the platform itself, it will maintain two user profiles, general public and private managers, providing expressly designed reports for both  of them. This functionality, coupled with an intuitive and multiplatform design of the  service, will transform  the accessibility of the  prevalent noise pollution information, under the umbrella of eco-friendly smart cities."
+msgstr "El resultado será un servicio web, que proporcionará diferentes funcionalidades al usuario final, teniendo la representación gráfica de los datos como el comportamiento central. Para representaciones personalizadas, se proporcionarán diferentes filtros, en función del marco de tiempo (por día, semana, mes ...), nivel de ruido total, octava o localización geográfica de los datos. Esta característica se ampliará a la gestión histórica de datos y la generación de informes especializados, con el objetivo final de apoyar los procesos de toma de decisiones. Con respecto a la plataforma en sí, mantendrá dos perfiles de usuario, gerentes públicos y privados en general, proporcionando informes diseñados expresamente para ambos. Esta funcionalidad, junto con un diseño intuitivo y multiplataforma del servicio, transformará la accesibilidad de la información de contaminación acústica prevalente, bajo el paraguas de ciudades inteligentes ecológicas."
+
+msgid "Start using Zaratamap GIS Filters"
+msgstr "Empezar a utilizar filtros SIG de Zaratamap"
+
+msgid "Zaratamap project, a new perspective on urban noise."
+msgstr "El projecto Zaratamap, una nueva perspectiva de ruido urbano."
+
+msgid "Applied regulation: administration level hierarchy"
+msgstr "Regulación aplicada: jerarquía de niveles de administración"
+
+msgid "Europe"
+msgstr "Europa"
+
+msgid "Spain"
+msgstr "España"
+
+msgid "Basque Country"
+msgstr "País Vasco"
+
+msgid "Displayed noise origin"
+msgstr "Displayed noise origin"
+
+msgid "Zaratamap GIS features: Custom noise map"
+msgstr "Funcionalidades GIS Zaratamap: Mapa de ruido personalizado"
+
+msgid "Please, introduce your filter parameters in the related fields"
+msgstr "Por favor, introduzca los parámetros de filtro deseado en los campos correspondientes"
+
+msgid "Apply"
+msgstr "Aplicar"
+
+msgid "Store Filter"
+msgstr "Guardar Filtro"
+
+msgid "Hide table"
+msgstr "Ocultar tabla"
+
+msgid "Point map"
+msgstr "Mapa de puntos"
+
+msgid "Noise map"
+msgstr "Mapa de ruido"
+
+msgid "Noise source map"
+msgstr "Mapa de origen de ruido"
+
+msgid "Open"
+msgstr "Abrir"
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Store as"
+msgstr "Guardar como"
+
+msgid "Update Filter"
+msgstr "Actualizar Filtro"
+
+msgid "Remove Filter"
+msgstr "Eliminar Filtro"
+
+msgid "Show table"
+msgstr "Mostrar tabla"

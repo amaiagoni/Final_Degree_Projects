@@ -1,0 +1,149 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block vueImport %}
+    <link rel="stylesheet" href="{% static 'vendor/charts/c3charts/c3.css'%}">
+{% endblock %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <div class="background-with-text">
+                        <img src="{% static 'images/filters_background.jpg' %}" alt="The Project" class="img-fluid">
+                        <h1 class="text-in-top-of-image">{% trans 'Noise filters' %}</h1>
+                    </div>
+                </div>
+                <br>
+                <h4 class="text-center">{% trans 'Some definitions...' %}</h4>
+                <br>
+                <div class="pills-outline">
+                    <ul class="nav nav-pills mb-1" id="pills-tab1" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="pills-home-tab-outline" data-toggle="pill" href="#pills-home-outline" role="tab" aria-controls="home" aria-selected="true">{% trans 'Audio analysis' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-profile-tab-outline" data-toggle="pill" href="#pills-profile-outline" role="tab" aria-controls="profile" aria-selected="false">{% trans 'A-Weighting' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="pills-contact-tab-outline" data-toggle="pill" href="#pills-contact-outline" role="tab" aria-controls="contact" aria-selected="false">{% trans 'Octave-band' %}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent1">
+                        <div class="tab-pane fade show active" id="pills-home-outline" role="tabpanel" aria-labelledby="pills-home-tab-outline">
+                            <p class="text-justify">{% blocktrans %}Audio analysis applies to the extraction of useful data from the digital codification of an electric signal representing an acoustic wave. Its objective is to obtain information from the wave to perform an analysis, classification, collection...{% endblocktrans %}</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile-outline" role="tabpanel" aria-labelledby="pills-profile-tab-outline">
+                            <p class="text-justify">{% blocktrans %}Human hearing range is composed by all frequencies that can be discerned by humans. This range varies from person to person, and is shortened with age. As an abstract generalization, all frequencies between 20 and 20000 Hz are considered audible. However, two sounds with the same intensity (usually measured in dBs) are not perceived as loud if they have different frequencies, as human sensitivity to sound varies with frequency. This phenomena is studied using specialized graphs called Equal-loudness contours, that measure sound pressure (in dB SPL) over frequencies inside the hearing range, for which a person recognizes different pure tones to have a steady loudness. Consequently, all points in a Equal-loudness contour will have the same perception, called sonority, measured in phons, reference measurement unit in these analysis. The most popular curve is called A-weighting, internationally defined in the IEC 61672:2003 standard.{% endblocktrans %}</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact-outline" role="tabpanel" aria-labelledby="pills-contact-tab-outline">
+                            <p class="text-justify">{% blocktrans %}In audio analysis, the audible spectrum can be divided into octave bands, defined as frequency bands whose highest frequency is two times the lowest one. Additionally, in deeper studies, these octaves can be divided into factors, being the most common ones one-third octaves, where original octaves are divided into three equal segments. For the most part, audio analyses divide audible frequencies into a finite number of octaves, repeatedly 10, named and known by their central frequencies.{% endblocktrans %}</p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <h5 class="card-header text-center">{% blocktrans %}Explore the filter frequency responses with our interactive chart!{% endblocktrans %}</h5>
+                    <div class="card-body">
+                        <div id="c3chart_spline2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var x = ['x'];
+        var aWeighting = ['A-Weighting'];
+        var data63 = ['63 Hz'];
+        var data125 = ['125 Hz'];
+        var data250 = ['250 Hz'];
+        var data500 = ['500 Hz'];
+        var data1000 = ['1000 Hz'];
+        var data2000 = ['2000 Hz'];
+        var data4000 = ['4000 Hz'];
+        var data8000 = ['8000 Hz'];
+        var data16000 = ['16000 Hz'];
+        window.onload = function() {
+            fetch("http://127.0.0.1:8000/es/retrieve_octaves", {
+                method: 'GET'
+            }).then(response => response.json())
+                .then(data => {
+                    x = x.concat(data.x);
+                    aWeighting = aWeighting.concat(data.AWeighting);
+                    data63 = data63.concat(data.octave63);
+                    data125 = data125.concat(data.octave125);
+                    data250 = data250.concat(data.octave250);
+                    data500 = data500.concat(data.octave500);
+                    data1000 = data1000.concat(data.octave1000);
+                    data2000 = data2000.concat(data.octave2000);
+                    data4000 = data4000.concat(data.octave4000);
+                    data8000 = data8000.concat(data.octave8000);
+                    data16000 = data16000.concat(data.octave16000);
+                    updateGraph();
+                });
+        };
+        function updateGraph(){
+            if (data250.length > 0) {
+                {#console.log(data250.toString());#}
+                var chart = c3.generate({
+                    bindto: "#c3chart_spline2",
+                    data: {
+                        x: 'x',
+                        columns: [
+                            x,
+                            aWeighting,
+                            data63,
+                            data125,
+                            data250,
+                            data500,
+                            data1000,
+                            data2000,
+                            data4000,
+                            data8000,
+                            data16000
+                        ],
+                        type: 'spline',
+                        colors: {
+                            'A-Weighting': '#5969ff',
+                            '63 Hz': '#729EA1',
+                            '125 Hz': '#EBA6A9',
+                            '250 Hz': '#ff407b',
+                            '500 Hz': '#61A0AF',
+                            '1000 Hz': '#96C9DC',
+                            '2000 Hz': '#F9B9B7',
+                            '4000 Hz': '#BDB4BF',
+                            '8000 Hz': '#6C6EA0',
+                            '16000 Hz': '#BC8DA7'
+                        }
+                    },
+                    axis: {
+                        y: {
+                            show: true,
+
+
+                        },
+                        x: {
+                            tick:{
+                                values:[0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000, 16000, 17000, 18000, 19000, 20000]
+                            }
+                            {#show: true,#}
+                        }
+                    }
+                });
+            };
+        };
+
+    </script>
+    <script src="{% static 'vendor/jquery/jquery-3.3.1.min.js'%}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js'%}"></script>
+    <script src="{% static 'vendor/slimscroll/jquery.slimscroll.js'%}"></script>
+    <script src="{% static 'vendor/charts/c3charts/c3.min.js'%}"></script>
+    <script src="{% static 'vendor/charts/c3charts/d3-5.4.0.min.js'%}"></script>
+    <script src="{% static 'vendor/charts/c3charts/C3chartjs.js'%}"></script>
+    <script src="{% static 'libs/js/main-js.js'%}"></script>
+{% endblock %}

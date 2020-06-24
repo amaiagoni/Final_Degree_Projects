@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+
+{% load static %}
+{% load i18n %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <link href="{% static 'vendor/fonts/circular-std/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'libs/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/fonts/fontawesome/css/fontawesome-all.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/fonts/flag-icon-css/flag-icon.min.css' %}">
+    <title>Zaratamap</title>
+
+    <script type="text/javascript" src = "{% static 'js/jQuery.js' %}"></script>
+    <script type="text/javascript" src = "{% static 'js/table.js' %}"></script>
+    {% block vueImport %}
+        <script type="text/javascript" src="{% static 'js/vue.js' %}"></script>
+    {% endblock %}
+</head>
+
+<body>
+<!-- ============================================================== -->
+<!-- main wrapper -->
+<!-- ============================================================== -->
+<div class="dashboard-main-wrapper">
+    <!-- ============================================================== -->
+    <!-- navbar -->
+    <!-- ============================================================== -->
+    <div class="dashboard-header">
+        <nav class="navbar navbar-expand-lg bg-white fixed-top">
+            <a class="navbar-brand" href="{% url 'index' %}">ZARATAMAP</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right-top">
+                    <li class="nav-item dropdown connection">
+                        <a class="nav-link" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-language"></i> </a>
+                        <ul class="dropdown-menu dropdown-menu-right connection-dropdown">
+                                <div class="row">
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 " style="text-align: center">
+                                        <button onclick="changeLanguage(this)" name="en" class="connection-item"><img src="{% static 'images/en_icon.png' %}" alt="" ></button>
+                                    </div>
+                                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 ">
+                                        <button onclick="changeLanguage(this)" name="es" class="connection-item"><img src="{% static 'images/es_icon.png' %}" alt="" ></button>
+                                    </div>
+                                </div>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown nav-user">
+                        {% if user.is_authenticated %}
+                            <a class="nav-link nav-user-img" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{ profile_picture }}" alt="" class="user-avatar-md rounded-circle"></a>
+                        {% else %}
+                            <a class="nav-link nav-user-img" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'images/anonymous.png'%}" alt="" class="user-avatar-md rounded-circle"></a>
+                        {%  endif %}
+                        <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
+                            {% if user.is_authenticated %}
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name">{{user.get_username}} </h5>
+                                    {% if user.is_superuser %}
+                                        <span class="status"></span><span class="ml-2">{% trans 'IT Administrator' %}</span>
+                                    {% elif perms.zaratamap_app.can_view %}
+                                        <span class="status"></span><span class="ml-2">{% trans 'Zaratamap Administrator' %}</span>
+                                    {% else %}
+                                        <span class="status"></span><span class="ml-2">{% trans 'Citizen' %}</span>
+                                    {% endif %}
+                                </div>
+                                <a class="dropdown-item" href="{% url 'profile' username=user.get_username %}"><i class="fas fa-user mr-2"></i>{% trans 'My Profile' %}</a>
+                                <form class="logout-link" action="{% url 'logout' %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="dropdown-item" type="submit" href=""><i class="fas fa-power-off mr-2"></i>{% trans 'Logout' %}</button>
+                                </form>
+                            {% else %}
+                                <div class="nav-user-info">
+                                    <h5 class="mb-0 text-white nav-user-name">{% trans 'Anonymous' %}</h5>
+                                </div>
+                                <a class="dropdown-item" href="{% url 'login' %}"><i class="fas fa-user mr-2"></i>{% trans 'Log in' %}</a>
+                                <a class="dropdown-item" href="{% url 'signup' %}"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;{% trans 'Sign up' %}</a>
+                                {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end navbar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
+    <div class="nav-left-sidebar sidebar-dark">
+        <div class="menu-list">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="d-xl-none d-lg-none">{% trans 'Zaratamap menu' %}</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-divider">
+                            Menu
+                        </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>{{ user.get_username }}<span class="badge badge-success">6</span></a>
+                                <div id="submenu-1" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'profile' username=user.get_username %}">{% trans 'My Profile' %}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{% url 'myfilters' %}">{% trans 'My Filters' %}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'table' %}"><i class="fas fa-sliders-h"></i>{% trans 'New filter' %}</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'login' %}"><i class="fa fa-fw fa-user-circle"></i>{% trans 'Log in' %}</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'map' %}"><i class="fas fa-fw fas fa-clock"></i>{% trans 'Real time data' %}</a>
+                        </li>
+                        {% if user.is_superuser %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'createuser' %}"><i class="fas fa-address-card"></i>{% trans 'Register new admin user' %}</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-divider">
+                            {% trans "More about" %}...
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" aria-expanded="false" data-target="#submenu-7" aria-controls="submenu-7"><i class="fas fa-people-carry"></i>Zaratamap <span class="badge badge-secondary">New</span></a>
+                            <div id="submenu-7" class="collapse submenu" style="">
+                                <ul class="nav flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'the_project' %}">{% trans "The Project" %}</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'contact_us' %}">{% trans "Contact Us" %}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'consequences' %}"><i class="fas fa-bullhorn"></i>{% trans 'Consequences of noise' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'octaves' %}"><i class="fas fa-chart-bar"></i>{% trans 'Noise filters' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'regulation' %}"><i class="fas fa-gavel"></i>{% trans 'Noise Regulation' %}</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        {% block contenido %}
+
+        {% endblock %}
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        {%  trans 'Zaratamap project, a new perspective on urban noise.' %}
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="{% url 'index' %}" class="footer-link">{% trans 'Home'%}</a>
+                            <a href="{% url 'contact_us' %}">{% trans 'Contact Us'%}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- end wrapper  -->
+    <!-- ============================================================== -->
+</div>
+
+{% block modals %}
+
+{% endblock %}
+<!-- ============================================================== -->
+<!-- end main wrapper  -->
+<!-- ============================================================== -->
+<!-- Optional JavaScript -->
+<!-- jquery 3.3.1 js-->
+<script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+<!-- bootstrap bundle js-->
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.js' %}"></script>
+<!-- slimscroll js-->
+<script src="{% static 'vendor/slimscroll/jquery.slimscroll.js' %}"></script>
+<!-- chartjs js-->
+<script src="{% static 'vendor/charts/charts-bundle/Chart.bundle.js' %}"></script>
+<script src="{% static 'vendor/charts/charts-bundle/chartjs.js' %}"></script>
+
+<!-- main js-->
+<script src="{% static 'libs/js/main-js.js' %}"></script>
+<!-- sparkline js-->
+<script src="{% static 'vendor/charts/sparkline/jquery.sparkline.js' %}"></script>
+<script src="{% static 'vendor/charts/sparkline/spark-js.js' %}"></script>
+
+<script type="text/javascript">
+    var languages = ["en", "es"]
+    function changeLanguage(element){
+        var currentURLParameters = window.location.pathname.split("/");
+        if (languages.includes(currentURLParameters[1])){
+            currentURLParameters[1] = element.name;
+            window.location = "http://127.0.0.1:8000" + currentURLParameters.join("/")
+        }else{
+            window.location = "http://127.0.0.1:8000/" + element.name + currentURLParameters.join("/")
+        }
+    }
+</script>
+{% block scripts %}
+
+{% endblock %}
+
+</body>
+
+</html>

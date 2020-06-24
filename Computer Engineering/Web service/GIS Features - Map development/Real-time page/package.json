@@ -1,0 +1,14 @@
+{
+  "name": "immediate-geographic",
+  "dependencies": {
+    "ol": "6.2.1",
+    "html-to-image": "^0.1.0"
+  },
+  "devDependencies": {
+    "parcel": "^1.12.4"
+  },
+  "scripts": {
+    "start": "parcel map.html",
+    "build": "parcel build --experimental-scope-hoisting --public-url . map.html"
+  }
+}

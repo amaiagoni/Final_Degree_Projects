@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dynamic Data</title>
+    <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=fetch,requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <style>
+        .map {
+            width: 100%;
+            height:400px;
+        }
+        #marker {
+        width: 20px;
+        height: 20px;
+        border: 1px solid #088;
+        border-radius: 10px;
+        background-color: #0FF;
+        opacity: 0.5;
+      }
+    </style>
+</head>
+<body>
+<div id="map" class="map"></div>
+<div id="mapLines" class="mapLines"></div>
+<div id="mapIcons" class="mapIcons"></div>
+<var id="zoom" hidden>{{ zoom }}</var>
+<div id="tooltip" class="tooltip"></div>
+<div id="tooltipLines" class="tooltipLines"></div>
+<var id="center" hidden>{{ center }}</var>
+<var id="geoJson" hidden>{{ geoJsonStreets }}</var>
+<var id="geoJsonPoints" hidden>{{ geoJsonPoints }}</var>
+<var id="mapImage" hidden></var>
+<img id="mapPointsImageImg" src="" alt="">
+<img id="mapLinesImageImg" src="" alt="">
+<img id="mapIconsImageImg" src="" alt="">
+<div id="tooltipIcons" class="tooltipIcons"></div>
+<var id="geoJsonIcons" hidden></var>
+<img hidden src="" id="airConditionerImage">
+<img hidden src="" id="carHornImage">
+<img hidden src="" id="childrenPlayingImage">
+<img hidden src="" id="dogBarkImage">
+<img hidden src="" id="drillingImage">
+<img hidden src="" id="engineIdlingImage">
+<img hidden src="" id="gunShotImage">
+<img hidden src="" id="jackhammerImage">
+<img hidden src="" id="sirenImage">
+<img hidden src="" id="streetMusicImage">
+<script src="map.js"></script>
+</body>
+</html>

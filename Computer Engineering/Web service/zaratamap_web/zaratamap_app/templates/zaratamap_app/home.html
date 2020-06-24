@@ -1,0 +1,26 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <img src="{% static 'images/Background_image_new.png' %}" alt="" class="img-fluid">
+                </div>
+                <br>
+                <h3 class="text-center">{% trans 'Welcome to Zaratamap!' %}</h3>
+                <p class="text-center">{% blocktrans %}Concerned with urban noise pollution and seeking the perfect well-being in our cities, we have created a new noise measuring paradigm. Based on intelligent sonometers, spread across multiple vehicles in our society, we have created a new dynamic noise map generation system, ready for our users to enjoy. Want to find out more?{% endblocktrans %}</p>
+                <div style="width: 100%; text-align: center">
+                    <div style="display: inline-block; margin: 0 auto;">
+                        <a class="btn btn-primary" href="{% url 'the_project' %}" >{% trans 'The Project' %}</a>
+                        <a class="btn btn-primary" href="{% url 'contact_us' %}" >{% trans 'Contact Us' %}</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

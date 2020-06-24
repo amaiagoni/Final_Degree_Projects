@@ -1,0 +1,25 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+
+        <div class="bg-light text-center">
+        <div class="row">
+            <div class="container">
+                    <div class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12">
+                        <div class="error-section">
+                            <img src="{% static 'images/404_error.JPG' %}" alt="" class="" style="width: 400px">
+                            <div class="error-section-content">
+                                <h2 class="display-3">{% trans 'Server Unavailable' %}</h2>
+                                <p>{% trans 'Sorry! It seems that Zaratamap noise server is temporarily unavailable. Please, try again later.' %}</p>
+                                <a href="{% url 'index' %}" class="btn btn-secondary btn-lg">{% trans 'Back to homepage' %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+{% endblock %}

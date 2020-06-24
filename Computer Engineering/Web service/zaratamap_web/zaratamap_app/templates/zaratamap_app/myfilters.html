@@ -1,0 +1,66 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <!-- ============================================================== -->
+        <!-- pageheader -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">{% trans 'My Filters' %}</h2>
+
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end pageheader -->
+        <!-- ============================================================== -->
+
+        <div class="row">
+            <!-- ============================================================== -->
+            <!-- validation form -->
+            <!-- ============================================================== -->
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <div class="list-group" id="list-group">
+                        {% for filter in filters %} {# {% url 'table' %}/{{ filter.0 }} #}
+                            <form class="list-group-item list-group-item-action" name="{{ filter.0 }}" id="form">
+                                {% csrf_token %}
+                                <p class="filter-name">{{ filter.0 }}</p>
+                                <p class="filter-date">{{ filter.1 }}</p>
+                                <div class="vertical-center-button">
+                                    <button type="button" class="btn btn-secondary" onclick="location.href='{% url 'table' %}/{{ filter.0 }}'">{% trans 'Open' %}</button>
+                                    <button type="button" class="btn btn-secondary" onclick="deleteFilter(this)">{% trans 'Delete'%}</button>
+                                </div>
+                            </form>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- end validation form -->
+    <!-- ============================================================== -->
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        function deleteFilter(elem){
+            const form = new FormData(document.querySelector("#form"));
+            form.set("name", elem.parentElement.getAttribute("name"));
+            fetch("http://127.0.0.1:8000/es/delete_filter", {
+                method: 'POST',
+                body: form
+            }).then(response => response.json())
+                .then(data => {
+                    if (data.confirmation === "OK") {
+                        document.getElementById('list-group').removeChild(elem.parentNode);
+                    }
+                });
+        }
+    </script>
+{% endblock %}

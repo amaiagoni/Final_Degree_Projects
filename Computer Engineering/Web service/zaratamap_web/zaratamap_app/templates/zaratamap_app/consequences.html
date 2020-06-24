@@ -1,0 +1,96 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <div class="background-with-text">
+                        <img src="{% static 'images/consequences_background.jpg' %}" alt="The Project" class="img-fluid">
+                        <h1 class="text-in-top-of-image">{% trans 'Consequences of noise' %}</h1>
+                    </div>
+                </div>
+                <br>
+                <h3 class="text-center">{% trans 'Noise: the forgotten pollution' %}</h3>
+                <br>
+                <div class="accrodion-regular">
+                    <div id="accordion4">
+                        <div class="card bg-primary">
+                            <div class="card-header" id="headingTen">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+                                        <span class="fas fa-angle-down mr-3"></span>{% trans 'Social impact' %}
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordion4">
+
+                                <div class="card-body profile-accordion" style="color:slategray;">
+                                    <p class="text-justify">{% blocktrans %}Globalization and internationalization have caused a fast increase in the number of people moving to urban areas. United Nations estimates that 55.3% of the total worldwide population in 2018 lived in cities, percentage expected to grow to 60% by 2030. The situation requires the establishment of an adequate growth-management in those the areas, focused on ensuring a high life-quality for the inhabitants. This responsibility devolves upon local authorities, that need to update its facilities and services through well-established action plans. This change in paradigm is developed under the umbrella of modern Smart Cities.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}More specifically, an inevitable consequence of the increase of inner-city population is the escalation of acoustic pollution. The higher the citizenry, the higher the number of sources that contribute to this contamination: traffic, industrial activity, nightlife…{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}The essential purpose of this project is to build a sonometer that can dynamically produce noise maps for their analysis. The interpretation of these reports is a highly useful mechanism for the authorities to take ethical and effective actions for the management of sound pollution, pursuing to improve both the human and the environment's  health.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}As a matter of fact, noise is not usually socially acknowledged as a pollutant agent, and because of that, there is no general perception of its detrimental consequences. In reality, the World Health Organization alerts that excess exposure to high ambient noise can be harmful to human health, interfering in its everyday activities. Concretely,  exposition to high levels of noise has been proven to manifest in auditive loss, cardiovascular illnesses, cognitive and sleep disorders, stress, changes in social interactions or low productivity.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}Particularly, a ranking carried out by the World Health Organization in 2016 positioned Spain as the second noisiest country in the world, with approximately nine million of Spanish citizens being exposed to more than the WHO's daily recommended maximum of 65 dBs.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}Therefore, the WHO alerts of the importance of authorities taking action to handle noise pollution, stating that it is the second cause of disease due to environmental reasons. In this circumstances, the device developed in this project can have a extensive ethical benefit, providing information to authorities for a better noise related action planning and visibility of the issue to the general public.{% endblocktrans %}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-primary">
+                            <div class="card-header" id="headingEleven">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                        <span class="fas fa-angle-down mr-3"></span>{% trans 'Environmental impact' %}
+                                    </button>       </h5>
+                            </div>
+                            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#accordion4">
+                                <div class="card-body profile-accordion" style="color:slategray;">
+                                    <p class="text-justify">{% blocktrans %}Humans are not the only environment actors that can benefit from this project. Noise pollution is a primary cause for fauna movement, as animals escape from high sounds that affect their natural activity. The migration of these creatures also implies the migrations of their predators, and, ultimately, the transformation of a whole area's flora, ground and landscapes.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}Additionally, loud noise exposition has other particular negative effects in both animal and vegetable life. For example, it interferes with pollination activities and seed propagation, drowns out mating calls of some species and can block listening for prey localization.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}The execution of this project would translate into a future state with more effective, specific and targeted laws and procedures regarding noise. Under these circumstances, noise pollution could decrease gradually, stopping its unfavorable impact on living beings and their environment.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}Regarding the environmental impact of the constructed physical device itself, it is considered that, designed as a tool whose ultimate purpose is to improve human health and environment pollution related policies management, the solution proposed needs to be as environmentally friendly as possible. On those grounds, low power consumption and modularity requirements have been dictated for the final product, ensuring a purposeful and eco-friendly device is built.{% endblocktrans %}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card bg-primary">
+                            <div class="card-header" id="headingTwelve">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link text-white" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                                        <span class="fas fa-angle-down mr-3"></span>{% trans 'Economic impact' %}
+                                    </button>       </h5>
+                            </div>
+                            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#accordion4">
+
+                                <div class="card-body profile-accordion" style="color:slategray;">
+                                    <p class="text-justify">{% blocktrans %}Acoustic pollution turns into not only inhabitant and environmental discomfort, but also into high costs for public administrations. Under these circumstances, noise becomes a serious concern of public managers in Smart Cities, where the need for the design and establishment of action plans to deal with sound pollution arises. In this regard, there is a compelling need for geo-located real-time monitorization of noise in metropolises, storing all data for its study, aiming to provide key knowledge in the process of designing the aforementioned action plans.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}In this context, the 2002/49/EC (END) Directive signed by the European Parliament, that refers to the evaluation and management of ambient noise, was established; with the objective of avoiding, preventing or decreasing the damaging effects of noise introduced earlier in this document. For that purpose, it enacts the regulation to produce and update each city’s noise map every five years. In detail, these noise maps are requested to provide information about the changes in ambient conditions that may have occurred during that period.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}The standard approach undertaken by authorities to perform this task nowadays is to record and process the information manually. One or more public workers are commissioned to travel across predefined points in the city, using high-prized, specialized equipment to register noise measurements. This is an expensive and time-consuming practice that has a significant impact on the cities’ public expenses.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}In addition, this methodology can be unrepresentative of reality, because, measurements carried out in one specific point, at a specific time, are not illustrative of other places in the same street or the noise level at other times of the day or periods of the year. In consequence, the high prized methodology used to perform the compulsory measurements can be inefficient, and ultimately, unjustifiable. In fact, the unrepresentativeness of the generated noise maps can be escalated to even more expensive projects, that without the right information, would fell on deaf ears.{% endblocktrans %}</p>
+
+                                    <p class="text-justify">{% blocktrans %}On this basis, this final degree project is expected to solve the problems regarding noise monitorization in urban areas, providing the authorities with a low-cost tool that allows them to have dynamic noise maps of the city. With them, concerned powers would be able to take the best possible actions to improve their inhabitants’ health and comfort, saving valuable public money and resources, that could be applied to other crucial actions.{% endblocktrans %}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

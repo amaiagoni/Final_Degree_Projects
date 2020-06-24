@@ -1,0 +1,64 @@
+{% extends 'zaratamap_app/base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block contenido %}
+    <div class="container-fluid  dashboard-content">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card-img-top">
+                    <div class="background-with-text">
+                        <img src="{% static 'images/regulation_background.jpg' %}" alt="The Project" class="img-fluid">
+                        <h1 class="text-in-top-of-image-regulation">{% trans 'Noise Regulation'%}</h1>
+                    </div>
+                </div>
+                <br>
+                <h3 class="text-center">{% trans 'Applied regulation: administration level hierarchy' %}</h3>
+                <div class="tab-vertical-outline">
+                    <ul class="nav nav-tabs " id="myTab4" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-outline-verti-tab" data-toggle="tab" href="#home-outline-vertical" role="tab" aria-controls="home" aria-selected="true">{% trans 'Europe' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-outline-verti-tab" data-toggle="tab" href="#profile-outline-vertical" role="tab" aria-controls="profile" aria-selected="false">{% trans 'Spain' %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="contact-outline-verti-tab" data-toggle="tab" href="#contact-outline-vertical" role="tab" aria-controls="contact" aria-selected="false">{% trans 'Basque Country' %}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent4">
+                        <div class="tab-pane fade show active " id="home-outline-vertical" role="tabpanel" aria-labelledby="home-outline-verti-tab">
+                            <p class="text-justify">{% blocktrans %}En el 7º Programa General de Acción de la UE, Vivir bien, respetando los límites de  nuestro  planeta,  se  pretende  que  la  mayor  parte  de  los  ciudadanos  que  vivan  en  áreas urbanas estén expuestos a ruidos en niveles por debajo de 55 dB diarios y 50 dB nocturnos. La UE no tiene competencias en legislación sobre  ruido, pero obliga a las autoridades a facilitar información pública sobre el impacto del ruido y a consultar a los ciudadanos sobre las medidas que tengan previsto adoptar para hacer frente a la contaminación acústica. Así, los ciudadanos pueden apreciar si las medidas adoptadas están aportando mejoras reales y ponerse en contacto con sus representantes en caso necesario. Para ello, se insta a las autoridades competentes a:{% endblocktrans %}</p>
+                            <ul>
+                                <li class="text-justify">{% blocktrans %}Preparar mapas de ruido para determinar exposición a fuentes (industria, transporte…){% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Los  mapas  sirven  como  base  para  la  adopción  de  planes  globales  diseñados  para prevenir y reducir la exposición, legislación nacional vinculante{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Los planes globales están relacionados con políticas de regulación de gestión de tráfico y promoción del uso de transportes eco-friendly{% endblocktrans %}</li>
+                            </ul>
+
+                        </div>
+                        <div class="tab-pane fade" id="profile-outline-vertical" role="tabpanel" aria-labelledby="profile-outline-verti-tab">
+                            <p class="text-justify">{% blocktrans %}Como estado, es el encargado de enviar la información de mapas de ruido, población expuesta, planes de acción… a la Comisión Europea según la directiva 2002/49/CE. La legislación estatal  sólo  es  aplicable  a  determinados  emisores  acústicos:  actividades  comerciales, industriales o de servicio y sus instalaciones, carreteras, ferrocarriles, puertos y aeropuertos de competencia del estado, actividades militares y ámbito laboral. Para ello, se establece una serie de niveles máximos de contaminación acústica tolerables, referentes a una zonificación acústica establecida. Los valores límite de inmisión de ruido y de ruido transmitido a locales colindantes se dividen por tipo de actividad, tipo de área acústica (para lo que es importante hacer primero una zonificación) y hora del día (7-19 Día; 19-23 Tarde; 23-7 Noche). Estos valores se establecen como su equivalente ponderado de la curva A, y para el resto de las actividades son 55 dB de día y 50 dB de noche. Acciones a tomar cuando molesta otro tipo de ruido:{% endblocktrans %}</p>
+                            <ul>
+                                <li class="text-justify">{% blocktrans %}Ruidos  vecinales:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica. El límite lo marcará la Ordenanza.{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Ruido de actividades:  Consultar Ordenanza Municipal del Ayuntamiento o Legislación Autonómica o RD 1367/2007. El límite es de < 30 dBA para la noche.{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Ruido  de  ocio:  Consultar  Ordenanza  Municipal  del  Ayuntamiento  o  Legislación Autonómica  o  RD  1367/2007.  Consultar  las  secciones  Zonas  Acústicas  Saturadas  u Objetivos de Calidad Acústica.{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Ruido  excluido:  Las  actividades  militares  y  ruido  en  el  puesto  de  trabajo  quedan excluidas de la ley 37/2003, y tienen reglamento específico.{% endblocktrans %}</li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane fade" id="contact-outline-vertical" role="tabpanel" aria-labelledby="contact-outline-verti-tab">
+                            <p class="text-justify">{% blocktrans %}Se encarga de la zonificación del territorio. Se obliga a los municipios  de más de 100.000 habitantes, a los titulares de infraestructuras viarias de más de 6000 veh IMD, y, en el caso del ferrocarril, al transporte de mercancías, a la realización de mapas de ruido y planes para actuar sobre las zonas prioritarias. Tiene competencias sobre los siguientes, que deben pedir permisos para poder llevar a cabo su labor:{% endblocktrans %}</p>
+                            <ul>
+                                <li class="text-justify">{% blocktrans %}Infraestructuras viarias, ferroviarias y portuarias de competencia autonómica o foral{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Actividades y obras a licencia, autorización, comunicación o declaración responsable{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Viales urbanos{% endblocktrans %}</li>
+                                <li class="text-justify">{% blocktrans %}Obras en la vía pública{% endblocktrans %}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

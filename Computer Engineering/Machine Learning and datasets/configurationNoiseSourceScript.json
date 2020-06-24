@@ -1,0 +1,8 @@
+{
+	"databaseConfiguration":{
+		"database": "TestData",
+		"host": "localhost",
+		"port": 8086,
+		"precision": "ms"
+	}
+}

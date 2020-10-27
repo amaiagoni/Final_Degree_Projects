@@ -2,7 +2,7 @@ bcrypt==3.1.6
 certifi==2019.3.9
 cffi==1.12.2
 chardet==3.0.4
-cryptography==2.8
+cryptography==3.2
 cycler==0.10.0
 Django==2.2.6
 fabric==2.5.0

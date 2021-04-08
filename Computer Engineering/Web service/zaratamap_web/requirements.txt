@@ -4,7 +4,7 @@ cffi==1.12.2
 chardet==3.0.4
 cryptography==2.8
 cycler==0.10.0
-Django==2.2.6
+Django==2.2.20
 fabric==2.5.0
 idna==2.8
 influxdb==5.2.3
